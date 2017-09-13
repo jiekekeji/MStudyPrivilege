@@ -11,17 +11,28 @@ import com.jk.tbmapper.TRoleMapper;
 import com.jk.tbpojo.TRole;
 
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/privilege")
 public class TRoleCtrl {
 
 	@Autowired
 	TRoleMapper tRoleMapper;
 
-	@RequestMapping("/selectOne")
+	/**
+	 * 创建角色
+	 * 
+	 * @param name
+	 *            角色名称
+	 * @param remarks
+	 *            角色备注描述等
+	 * @param resIds
+	 *            角色拥有的权限id
+	 * @return
+	 */
+	@RequestMapping("/role/create")
 	@ResponseBody
-	public String selectOne() {
-		
-		String uuid=UUID.randomUUID().toString().replace("-", "").toLowerCase();
+	public String roleCreate(String name, String remarks, String[] resIds) {
+
+		String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
 
 		TRole role = new TRole();
 		role.setId(uuid);
