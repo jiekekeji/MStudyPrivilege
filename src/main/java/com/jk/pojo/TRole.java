@@ -5,7 +5,7 @@ public class TRole {
 
     private String name;
 
-    private String desc;
+    private String remarks;
 
     public String getId() {
         return id;
@@ -23,12 +23,12 @@ public class TRole {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TRole {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", desc=").append(desc);
+        sb.append(", remarks=").append(remarks);
         sb.append("]");
         return sb.toString();
     }
@@ -58,7 +58,7 @@ public class TRole {
         TRole other = (TRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()));
+            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TRole {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
+        result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
         return result;
     }
 }

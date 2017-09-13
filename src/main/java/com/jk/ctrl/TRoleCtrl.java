@@ -19,13 +19,13 @@ public class TRoleCtrl {
 	@ResponseBody
 	public String selectOne() {
 
-		TRole role = new TRole();
-		role.setId("159ccce2265e04f4533378e0e6c28958");
-		role.setName("service");
-//		role.setDesc("service desc");
-
-		int code = tRoleMapper.insert(role);
-		System.out.println("role" + code);
+//		TRole role = new TRole();
+//		role.setId("159ccce2265e04f4533378e0e6c28911");
+//		role.setName("service");
+////		role.setDesc("service desc");
+//
+//		int code = tRoleMapper.insert(role);
+		System.out.println("role" + tRoleMapper.selectByPrimaryKey("159ccce2265e04f4533378e0e6c28911"));
 		return "success";
 	}
 
