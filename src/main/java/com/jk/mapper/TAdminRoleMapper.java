@@ -1,7 +1,5 @@
 package com.jk.mapper;
 
-import com.jk.pojo.TAdminRole;
-import com.jk.pojo.TAdminRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -9,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.jk.pojo.TAdminRole;
+import com.jk.pojo.TAdminRoleExample;
 
 public interface TAdminRoleMapper {
     int countByExample(TAdminRoleExample example);

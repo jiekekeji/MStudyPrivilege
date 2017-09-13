@@ -1,7 +1,5 @@
 package com.jk.mapper;
 
-import com.jk.pojo.TGroup;
-import com.jk.pojo.TGroupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -9,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.jk.pojo.TGroup;
+import com.jk.pojo.TGroupExample;
 
 public interface TGroupMapper {
     int countByExample(TGroupExample example);
