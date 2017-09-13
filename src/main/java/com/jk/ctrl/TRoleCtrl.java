@@ -32,14 +32,10 @@ public class TRoleCtrl {
 	@ResponseBody
 	public String roleCreate(String name, String remarks, String[] resIds) {
 
-		String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+		System.out.println(name);
+		System.out.println(remarks);
+		System.out.println(resIds.length);
 
-		TRole role = new TRole();
-		role.setId(uuid);
-		role.setName("客服");
-		role.setRemarks("备注信息");
-		int code = tRoleMapper.insert(role);
-		System.out.println("role" + tRoleMapper.selectByPrimaryKey(uuid));
 		return "success";
 	}
 
