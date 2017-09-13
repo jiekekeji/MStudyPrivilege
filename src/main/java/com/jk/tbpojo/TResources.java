@@ -1,11 +1,13 @@
-package com.jk.pojo;
+package com.jk.tbpojo;
 
-public class TGroup {
+public class TResources {
     private String id;
 
     private String name;
 
-    private String remarks;
+    private String url;
+
+    private String groupId;
 
     public String getId() {
         return id;
@@ -23,12 +25,20 @@ public class TGroup {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getUrl() {
+        return url;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId == null ? null : groupId.trim();
     }
 
     @Override
@@ -39,7 +49,8 @@ public class TGroup {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", remarks=").append(remarks);
+        sb.append(", url=").append(url);
+        sb.append(", groupId=").append(groupId);
         sb.append("]");
         return sb.toString();
     }
@@ -55,10 +66,11 @@ public class TGroup {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TGroup other = (TGroup) that;
+        TResources other = (TResources) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getGroupId() == null ? other.getGroupId() == null : this.getGroupId().equals(other.getGroupId()));
     }
 
     @Override
@@ -67,7 +79,8 @@ public class TGroup {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getGroupId() == null) ? 0 : getGroupId().hashCode());
         return result;
     }
 }

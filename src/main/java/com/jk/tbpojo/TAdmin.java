@@ -1,4 +1,4 @@
-package com.jk.pojo;
+package com.jk.tbpojo;
 
 public class TAdmin {
     private String id;

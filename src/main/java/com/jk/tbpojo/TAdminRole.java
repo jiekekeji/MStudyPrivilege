@@ -1,4 +1,4 @@
-package com.jk.pojo;
+package com.jk.tbpojo;
 
 public class TAdminRole {
     private String id;

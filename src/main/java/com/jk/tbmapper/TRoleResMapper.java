@@ -1,19 +1,26 @@
-package com.jk.mapper;
+package com.jk.tbmapper;
 
+import com.jk.tbpojo.TRoleRes;
+import com.jk.tbpojo.TRoleResExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
-
-import com.jk.pojo.TRoleRes;
-import com.jk.pojo.TRoleResExample;
+import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.type.JdbcType;
 
 public interface TRoleResMapper {
+    @SelectProvider(type=TRoleResSqlProvider.class, method="countByExample")
     int countByExample(TRoleResExample example);
 
+    @DeleteProvider(type=TRoleResSqlProvider.class, method="deleteByExample")
     int deleteByExample(TRoleResExample example);
 
     @Delete({
@@ -28,8 +35,15 @@ public interface TRoleResMapper {
     })
     int insert(TRoleRes record);
 
+    @InsertProvider(type=TRoleResSqlProvider.class, method="insertSelective")
     int insertSelective(TRoleRes record);
 
+    @SelectProvider(type=TRoleResSqlProvider.class, method="selectByExample")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
+        @Result(column="role_id", property="roleId", jdbcType=JdbcType.CHAR),
+        @Result(column="res_id", property="resId", jdbcType=JdbcType.CHAR)
+    })
     List<TRoleRes> selectByExample(TRoleResExample example);
 
     @Select({
@@ -38,13 +52,20 @@ public interface TRoleResMapper {
         "from t_role_res",
         "where id = #{id,jdbcType=CHAR}"
     })
-    @ResultMap("BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
+        @Result(column="role_id", property="roleId", jdbcType=JdbcType.CHAR),
+        @Result(column="res_id", property="resId", jdbcType=JdbcType.CHAR)
+    })
     TRoleRes selectByPrimaryKey(String id);
 
+    @UpdateProvider(type=TRoleResSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") TRoleRes record, @Param("example") TRoleResExample example);
 
+    @UpdateProvider(type=TRoleResSqlProvider.class, method="updateByExample")
     int updateByExample(@Param("record") TRoleRes record, @Param("example") TRoleResExample example);
 
+    @UpdateProvider(type=TRoleResSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(TRoleRes record);
 
     @Update({

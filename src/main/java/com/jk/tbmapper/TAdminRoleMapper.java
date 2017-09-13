@@ -1,19 +1,26 @@
-package com.jk.mapper;
+package com.jk.tbmapper;
 
+import com.jk.tbpojo.TAdminRole;
+import com.jk.tbpojo.TAdminRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
-
-import com.jk.pojo.TAdminRole;
-import com.jk.pojo.TAdminRoleExample;
+import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.type.JdbcType;
 
 public interface TAdminRoleMapper {
+    @SelectProvider(type=TAdminRoleSqlProvider.class, method="countByExample")
     int countByExample(TAdminRoleExample example);
 
+    @DeleteProvider(type=TAdminRoleSqlProvider.class, method="deleteByExample")
     int deleteByExample(TAdminRoleExample example);
 
     @Delete({
@@ -28,8 +35,15 @@ public interface TAdminRoleMapper {
     })
     int insert(TAdminRole record);
 
+    @InsertProvider(type=TAdminRoleSqlProvider.class, method="insertSelective")
     int insertSelective(TAdminRole record);
 
+    @SelectProvider(type=TAdminRoleSqlProvider.class, method="selectByExample")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
+        @Result(column="role_id", property="roleId", jdbcType=JdbcType.CHAR),
+        @Result(column="admin_id", property="adminId", jdbcType=JdbcType.CHAR)
+    })
     List<TAdminRole> selectByExample(TAdminRoleExample example);
 
     @Select({
@@ -38,13 +52,20 @@ public interface TAdminRoleMapper {
         "from t_admin_role",
         "where id = #{id,jdbcType=CHAR}"
     })
-    @ResultMap("BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
+        @Result(column="role_id", property="roleId", jdbcType=JdbcType.CHAR),
+        @Result(column="admin_id", property="adminId", jdbcType=JdbcType.CHAR)
+    })
     TAdminRole selectByPrimaryKey(String id);
 
+    @UpdateProvider(type=TAdminRoleSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") TAdminRole record, @Param("example") TAdminRoleExample example);
 
+    @UpdateProvider(type=TAdminRoleSqlProvider.class, method="updateByExample")
     int updateByExample(@Param("record") TAdminRole record, @Param("example") TAdminRoleExample example);
 
+    @UpdateProvider(type=TAdminRoleSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(TAdminRole record);
 
     @Update({

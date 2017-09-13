@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jk.mapper.TRoleMapper;
-import com.jk.pojo.TRole;
+import com.jk.tbmapper.TRoleMapper;
+import com.jk.tbpojo.TRole;
 
 @Controller
 @RequestMapping("/role")
@@ -25,10 +25,10 @@ public class TRoleCtrl {
 
 		TRole role = new TRole();
 		role.setId(uuid);
-		role.setName("Asdfasdfasdf阿斯顿发阿斯顿发送阿斯顿发fsaffffffffff等待斗订单订单1");
+		role.setName("客服");
 		role.setRemarks("备注信息");
 		int code = tRoleMapper.insert(role);
-		System.out.println("role" + tRoleMapper.selectByPrimaryKey("159ccce2265e04f4533378e0e6c28911"));
+		System.out.println("role" + tRoleMapper.selectByPrimaryKey(uuid));
 		return "success";
 	}
 
