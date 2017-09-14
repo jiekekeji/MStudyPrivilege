@@ -10,11 +10,35 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
 	</context-param>
-	<!-- 启动 IOC 容器的 ServletContextListener -->
+	<!--end 配置spring IOC容器的监听器 -->
+
+
+	<!-- start post乱码处理器 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- end post乱码处理器 -->
+
+
+	<!-- start 启动 Spring IOC 容器的 ServletContextListener -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!--end 配置spring IOC容器的监听器 -->
+	<!-- end 启动 Spring IOC 容器的 ServletContextListener -->
+
 
 	<!--start 配置springmvc IOC容器 -->
 	<servlet>
@@ -33,4 +57,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!--end 配置springmvc IOC容器 -->
+
+
 </web-app>
