@@ -1,39 +1,36 @@
 package com.jk.ctrl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jk.tbmapper.TRoleMapper;
+import com.jk.service.RoleService;
+import com.jk.utils.TxUtils;
 
 @Controller
-@RequestMapping("/privilege")
+@RequestMapping("/role")
 public class TRoleCtrl {
 
 	@Autowired
-	TRoleMapper tRoleMapper;
+	private RoleService roleService;
 
-	/**
-	 * 创建角色
-	 * 
-	 * @param name
-	 *            角色名称
-	 * @param remarks
-	 *            角色备注描述等
-	 * @param resIds
-	 *            角色拥有的权限id
-	 * @return
-	 */
-	@RequestMapping("/role/create")
+	@RequestMapping("/create")
 	@ResponseBody
-	public String roleCreate(String name, String remarks, String[] resIds) {
+	public Object roleCreate(String name, String remarks, String[] resIds) {
 
-		System.out.println(name);
-		System.out.println(remarks);
-		System.out.println(resIds.length);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(name) || TxUtils.isEmpty(remarks) || name.length() > 24 || remarks.length() > 255) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
 
-		return "success";
+		return roleService.addRole(name, remarks, resIds);
+
 	}
 
 }

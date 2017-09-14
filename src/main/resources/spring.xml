@@ -27,8 +27,8 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<property name="maxActive" value="10" />
-		<property name="maxIdle" value="5" />
+		<property name="maxActive" value="50" />
+		<property name="maxIdle" value="50" />
 	</bean>
 
 	<!-- 3、sqlSessinFactory -->
@@ -47,7 +47,15 @@
 		<property name="basePackage" value="com.jk.tbmapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-
 	<!-- *******end mybatis的配置********* -->
+
+
+	<!--start Spring事务管理器的配置，管理dbcp数据源dataSource -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!--end Spring事务管理器的配置，管理dbcp数据源dataSource -->
 
 </beans>
