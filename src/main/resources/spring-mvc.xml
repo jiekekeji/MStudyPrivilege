@@ -11,12 +11,28 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 自动扫描 @Controller,只扫描以下的两个注解,其他的有spring扫描 -->
-	<context:component-scan base-package="com.jk.*" use-default-filters="false">
+	<context:component-scan base-package="com.jk.*"
+		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller"></context:include-filter>
 		<context:include-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice"></context:include-filter>
 	</context:component-scan>
+
+	<mvc:annotation-driven>
+		<!-- start 解决返回json数据的中文乱码问题 -->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+		<!-- end 解决返回json数据的中文乱码问题 -->
+	</mvc:annotation-driven>
+
 
 	<!--配置视图解析器,把handle方法返回值解析为武器视图 -->
 	<bean
