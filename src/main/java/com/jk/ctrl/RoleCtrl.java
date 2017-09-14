@@ -13,7 +13,7 @@ import com.jk.utils.TxUtils;
 
 @Controller
 @RequestMapping("/role")
-public class TRoleCtrl {
+public class RoleCtrl {
 
 	@Autowired
 	private RoleService roleService;
