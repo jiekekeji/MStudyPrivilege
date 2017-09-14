@@ -29,9 +29,52 @@ public class GroupCtrl {
 			return map;
 		}
 
-		Object o = groupService.addGroup(name, remarks);
-		System.out.println(o);
-		return o;
+		return groupService.addGroup(name, remarks);
 
+	}
+
+	@RequestMapping("/delete_id")
+	@ResponseBody
+	public Object groupDeleteById(String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(id) || id.length() != 32) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
+		return groupService.deleteGroupById(id);
+	}
+
+	@RequestMapping("/select_all")
+	@ResponseBody
+	public Object selectGruopAll() {
+		return groupService.selectGruopAll();
+	}
+
+	@RequestMapping("/is_group_name_exit")
+	@ResponseBody
+	public Object isGroupNameExit(String name) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(name) || name.length() > 24) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
+		return groupService.isGroupNameExit(name);
+	}
+
+	@RequestMapping("/update_group_by_id")
+	@ResponseBody
+	public Object updateGroupById(String id, String name, String remarks) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(name) || TxUtils.isEmpty(remarks) || TxUtils.isEmpty(id) || id.length() != 32
+				|| name.length() > 24 || remarks.length() > 255) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
+
+		return groupService.updateGroupById(id, name, remarks);
 	}
 }
