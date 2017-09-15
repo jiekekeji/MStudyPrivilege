@@ -115,9 +115,7 @@ public class ResourcesService {
 			return map;
 		}
 		map.put("code", "ok");
-
 		return map;
-
 	}
 
 	public Object selectByGroupId(String groupId) {
@@ -142,7 +140,7 @@ public class ResourcesService {
 	public Object selectAll() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
-		example.setOrderByClause("groupId ASC");
+		example.setOrderByClause("group_id ASC");
 		try {
 			List<TResources> record = resourcesMapper.selectByExample(example);
 			map.put("code", "ok");
