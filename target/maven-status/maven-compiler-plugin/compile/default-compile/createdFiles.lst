@@ -23,10 +23,9 @@ com\jk\tbmapper\TAdminSqlProvider.class
 com\jk\filters\MyRequest.class
 com\jk\tbpojo\TAdmin.class
 com\jk\tbmapper\TRoleMapper.class
-com\jk\ctrl\TRoleCtrl.class
 com\jk\tbpojo\TAdminExample.class
-com\jk\filters\EncodingFilter.class
 com\jk\tbpojo\TRoleResExample$GeneratedCriteria.class
+com\jk\filters\EncodingFilter.class
 com\jk\tbpojo\TRole.class
 com\jk\tbpojo\TRoleExample$Criterion.class
 com\jk\tbmapper\TRoleSqlProvider.class
