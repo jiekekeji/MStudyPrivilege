@@ -26,8 +26,8 @@ public class RoleService {
 	@Autowired
 	private TRoleResMapper roleResMapper;
 
-	@Transactional(propagation = Propagation.MANDATORY)
-	public Object add(String name, String remarks, String[] resourcesIDs) {
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Map<String, Object> add(String name, String remarks, String[] resourcesIDs) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 判断是否已存在name
@@ -40,33 +40,26 @@ public class RoleService {
 		role.setId(UUIDUtils.uuid());
 		role.setName(name);
 		role.setRemarks(remarks);
-		roleMapper.insert(role);
-		
-		String string  = null;
-	    if(string.equals("")) {
-	        int i = 0;
-	    }
+		try {
+			// 往角色表中添加
+			roleMapper.insert(role);
+			// 往角色资源关系表添加
+			for (int i = 0; i < resourcesIDs.length; i++) {
+				TRoleRes res = new TRoleRes();
+				res.setId(UUIDUtils.uuid());
+				res.setRoleId(role.getId());
+				res.setResId(resourcesIDs[i]);
+				roleResMapper.insert(res);
+			}
+			map.put("code", "ok");
+			map.put("desc", "添加成功");
+			return map;
+		} catch (Exception e) {
+			map.put("code", "error");
+			map.put("desc", "添加失败");
+			throw new RuntimeException(e);
+		}
 
-//		try {
-//			// 往角色表中添加
-//			roleMapper.insert(role);
-//			// 往角色资源关系表添加
-//			for (int i = 0; i < resourcesIDs.length; i++) {
-//				TRoleRes res = new TRoleRes();
-//				res.setId(UUIDUtils.uuid());
-//				res.setRoleId(role.getId());
-//				res.setResId(resourcesIDs[i]);
-//				roleResMapper.insert(res);
-//			}
-//			map.put("code", "ok");
-//			map.put("desc", "添加成功");
-//		} catch (Exception e) {
-//			map.put("code", "error");
-//			map.put("desc", "添加失败");
-//			System.out.println(e.toString());
-//			throw new RuntimeException(e);
-//		}
-		return map;
 	}
 
 	@Transactional

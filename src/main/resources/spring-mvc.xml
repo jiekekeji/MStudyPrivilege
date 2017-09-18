@@ -33,7 +33,6 @@
 		<!-- end 解决返回json数据的中文乱码问题 -->
 	</mvc:annotation-driven>
 
-
 	<!--配置视图解析器,把handle方法返回值解析为武器视图 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

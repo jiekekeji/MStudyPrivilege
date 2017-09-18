@@ -27,7 +27,13 @@ public class RoleCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return roleService.add(name, remarks, resourcesIDs);
+		try {
+			map = roleService.add(name, remarks, resourcesIDs);
+		} catch (Exception e) {
+			map.put("code", "error");
+			map.put("desc", "添加失败");
+		}
+		return map;
 	}
 
 	@RequestMapping("/delete_id")
