@@ -12,13 +12,13 @@ import com.jk.service.GroupService;
 import com.jk.utils.TxUtils;
 
 @Controller
-@RequestMapping("/group")
+@RequestMapping("/resources/group")
 public class GroupCtrl {
 
 	@Autowired
 	private GroupService groupService;
 
-	@RequestMapping("/create")
+	@RequestMapping("/add")
 	@ResponseBody
 	public Object groupCreate(String name, String remarks) {
 
