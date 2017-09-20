@@ -7,10 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.jk.tbmapper.TResourcesMapper;
 import com.jk.tbpojo.TResources;
 import com.jk.tbpojo.TResourcesExample;
-import com.jk.utils.TxUtils;
 import com.jk.utils.UUIDUtils;
 
 @Service
@@ -19,75 +20,59 @@ public class ResourcesService {
 	@Autowired
 	private TResourcesMapper resourcesMapper;
 
-	public Object add(String name, String url, String groupId) {
+	public Map<String, Object> add(String name, String url, String groupId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		Map<String, Object> temp = isResourcesNameExit(name);
-		if ("error".equals(temp.get("code"))) {
-			return temp;
-		}
-
 		TResources record = new TResources();
 		record.setId(UUIDUtils.uuid());
 		record.setName(name);
 		record.setUrl(url);
 		record.setGroupId(groupId);
 		try {
+			Map<String, Object> temp = isResourcesNameExit(name);
+			if ("error".equals(temp.get("code"))) {
+				return temp;
+			}
 			resourcesMapper.insert(record);
 			map.put("code", "ok");
 			map.put("resources", record);
 			return map;
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
-
 	}
 
-	public Object deleteByID(String id) {
+	public Map<String, Object> deleteByID(String id) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (TxUtils.isEmpty(id) || id.length() != 32) {
-			map.put("code", "error");
-			map.put("desc", "参数错误");
-			return map;
-		}
 		try {
 			resourcesMapper.deleteByPrimaryKey(id);
 			map.put("code", "ok");
 			map.put("desc", "删除成功!");
 			return map;
-
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
 
 	}
 
-	public Object udapteByID(String id, String name, String url, String groupId) {
+	public Object udapteByID(String id, String name, String url, String groupId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResources record = new TResources();
 		record.setId(UUIDUtils.uuid());
 		record.setName(name);
 		record.setUrl(url);
 		record.setGroupId(groupId);
-
 		try {
 			resourcesMapper.updateByPrimaryKey(record);
 			map.put("code", "ok");
 			map.put("desc", "更新成功!");
 			return map;
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
 
 	}
 
-	public Object selectByID(String id) {
+	public Object selectByID(String id) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			TResources record = resourcesMapper.selectByPrimaryKey(id);
@@ -95,61 +80,65 @@ public class ResourcesService {
 			map.put("resources", record);
 			return map;
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
 
 	}
 
-	public Map<String, Object> isResourcesNameExit(String name) {
+	public Map<String, Object> isResourcesNameExit(String name) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		TResourcesExample example = new TResourcesExample();
 		TResourcesExample.Criteria criteria = example.createCriteria();
 		criteria.andNameEqualTo(name);
-		List<TResources> resources = resourcesMapper.selectByExample(example);
-		if (null != resources && resources.size() > 0) {
+		List<TResources> resources;
+		try {
+			resources = resourcesMapper.selectByExample(example);
+			if (null == resources || resources.size() == 0) {
+				map.put("code", "ok");
+				map.put("desc", "资源名称未存在");
+				return map;
+			}
 			map.put("code", "error");
 			map.put("desc", "资源名称已存在");
 			return map;
+		} catch (Exception e) {
+			throw e;
 		}
-		map.put("code", "ok");
-		return map;
+
 	}
 
-	public Object selectByGroupId(String groupId) {
+	public Object selectByGroupId(String groupId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
 		TResourcesExample.Criteria criteria = example.createCriteria();
 		criteria.andGroupIdEqualTo(groupId);
-
+		List<TResources> record;
 		try {
-			List<TResources> record = resourcesMapper.selectByExample(example);
+			record = resourcesMapper.selectByExample(example);
 			map.put("code", "ok");
 			map.put("resources", record);
 			return map;
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
 
 	}
 
-	public Object selectAll() {
+	public Object selectAll(int pageNum, int pageSize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
 		example.setOrderByClause("group_id ASC");
+		List<TResources> records;
 		try {
-			List<TResources> record = resourcesMapper.selectByExample(example);
+			Page<TResources> page = PageHelper.startPage(pageNum, pageSize, true);
+			long count = page.getTotal();
+			records = resourcesMapper.selectByExample(example);
 			map.put("code", "ok");
-			map.put("resources", record);
+			map.put("count", count);
+			map.put("resources", records);
 			return map;
 		} catch (Exception e) {
-			map.put("code", "error");
-			map.put("desc", e.toString());
-			return map;
+			throw e;
 		}
 
 	}

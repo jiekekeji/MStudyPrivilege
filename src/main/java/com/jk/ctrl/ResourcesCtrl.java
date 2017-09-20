@@ -28,10 +28,18 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return resourcesService.add(name, url, groupId);
+		try {
+			return resourcesService.add(name, url, groupId);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "添加失败");
+		return map;
+
 	}
 
-	@RequestMapping("/delete_id")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public Object deleteByID(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -40,10 +48,17 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return resourcesService.deleteByID(id);
+		try {
+			return resourcesService.deleteByID(id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "删除失败");
+		return map;
 	}
 
-	@RequestMapping("/udapte_id")
+	@RequestMapping("/udapte")
 	@ResponseBody
 	public Object udapteByID(String id, String name, String url, String groupId) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -53,10 +68,18 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return resourcesService.udapteByID(id, name, url, groupId);
+		try {
+			return resourcesService.udapteByID(id, name, url, groupId);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "更新失败");
+		return map;
+
 	}
 
-	@RequestMapping("/select_id")
+	@RequestMapping("/selectbyid")
 	@ResponseBody
 	public Object selectByID(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -65,10 +88,17 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return resourcesService.selectByID(id);
+		try {
+			return resourcesService.selectByID(id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 
-	@RequestMapping("/is_name_exit")
+	@RequestMapping("/isnameexit")
 	@ResponseBody
 	public Object isResourcesNameExit(String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -77,12 +107,17 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-
-		return resourcesService.isResourcesNameExit(name);
-
+		try {
+			return resourcesService.isResourcesNameExit(name);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 
-	@RequestMapping("/select_groupId")
+	@RequestMapping("/selectbygid")
 	@ResponseBody
 	public Object selectByGroupId(String groupId) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -91,13 +126,29 @@ public class ResourcesCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return resourcesService.selectByGroupId(groupId);
+		try {
+			return resourcesService.selectByGroupId(groupId);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
+
 	}
 
-	@RequestMapping("/select_all")
+	@RequestMapping("/selectall")
 	@ResponseBody
-	public Object selectAll() {
-		return resourcesService.selectAll();
+	public Object selectAll(Integer pagenum, Integer pagesize) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			return resourcesService.selectAll(pagenum, pagesize);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 
 }
