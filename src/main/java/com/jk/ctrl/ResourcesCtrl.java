@@ -32,11 +32,10 @@ public class ResourcesCtrl {
 			return resourcesService.add(name, url, groupId);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "添加失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "添加失败");
-		return map;
-
 	}
 
 	@RequestMapping("/delete")
@@ -52,10 +51,10 @@ public class ResourcesCtrl {
 			return resourcesService.deleteByID(id);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "删除失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "删除失败");
-		return map;
 	}
 
 	@RequestMapping("/udapte")
@@ -72,11 +71,10 @@ public class ResourcesCtrl {
 			return resourcesService.udapteByID(id, name, url, groupId);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "更新失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "更新失败");
-		return map;
-
 	}
 
 	@RequestMapping("/selectbyid")
@@ -92,10 +90,10 @@ public class ResourcesCtrl {
 			return resourcesService.selectByID(id);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
 	}
 
 	@RequestMapping("/isnameexit")
@@ -111,15 +109,15 @@ public class ResourcesCtrl {
 			return resourcesService.isResourcesNameExit(name);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
 	}
 
 	@RequestMapping("/selectbygid")
 	@ResponseBody
-	public Object selectByGroupId(String groupId) {
+	public Object selectByGroupId(String groupId, Integer pagenum, Integer pagesize) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(groupId) || groupId.length() != 32) {
 			map.put("code", "error");
@@ -127,14 +125,13 @@ public class ResourcesCtrl {
 			return map;
 		}
 		try {
-			return resourcesService.selectByGroupId(groupId);
+			return resourcesService.selectByGroupId(groupId, pagenum, pagesize);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
-
 	}
 
 	@RequestMapping("/selectall")
@@ -145,10 +142,10 @@ public class ResourcesCtrl {
 			return resourcesService.selectAll(pagenum, pagesize);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
 	}
 
 }

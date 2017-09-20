@@ -31,10 +31,10 @@ public class GroupCtrl {
 			return groupService.addGroup(name, remarks);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "添加失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "添加失败");
-		return map;
 	}
 
 	@RequestMapping("/delete")
@@ -50,10 +50,11 @@ public class GroupCtrl {
 			return groupService.deleteGroupById(id);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "删除失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "删除失败");
-		return map;
+
 	}
 
 	@RequestMapping("/select")
@@ -64,10 +65,10 @@ public class GroupCtrl {
 			return groupService.selectGruopAll();
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
 	}
 
 	@RequestMapping("/isexit")
@@ -83,10 +84,11 @@ public class GroupCtrl {
 			return groupService.isGroupNameExit(name);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
+
 	}
 
 	@RequestMapping("/update")
@@ -104,9 +106,10 @@ public class GroupCtrl {
 			return groupService.updateGroupById(id, name, remarks);
 		} catch (Exception e) {
 			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "查询失败");
+			return map;
 		}
-		map.put("code", "error");
-		map.put("desc", "查询失败");
-		return map;
+
 	}
 }

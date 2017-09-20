@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jk.tbmapper.TResourcesMapper;
 import com.jk.tbpojo.TResources;
 import com.jk.tbpojo.TResourcesExample;
@@ -107,16 +108,26 @@ public class ResourcesService {
 
 	}
 
-	public Object selectByGroupId(String groupId) throws Exception {
+	public Object selectByGroupId(String groupId, Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
 		TResourcesExample.Criteria criteria = example.createCriteria();
 		criteria.andGroupIdEqualTo(groupId);
-		List<TResources> record;
+		List<TResources> records;
 		try {
-			record = resourcesMapper.selectByExample(example);
+			if (null == pagenum || null == pagesize) {
+				records = resourcesMapper.selectByExample(example);
+				map.put("code", "ok");
+				map.put("resources", records);
+				return map;
+			}
+			PageHelper.startPage(pagenum, pagesize);
+			records = resourcesMapper.selectByExample(example);
+			PageInfo<TResources> page = new PageInfo<TResources>(records);
+			long count = page.getTotal();
 			map.put("code", "ok");
-			map.put("resources", record);
+			map.put("count", count);
+			map.put("resources", records);
 			return map;
 		} catch (Exception e) {
 			throw e;
@@ -124,15 +135,22 @@ public class ResourcesService {
 
 	}
 
-	public Object selectAll(int pageNum, int pageSize) throws Exception {
+	public Object selectAll(Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
 		example.setOrderByClause("group_id ASC");
 		List<TResources> records;
 		try {
-			Page<TResources> page = PageHelper.startPage(pageNum, pageSize, true);
-			long count = page.getTotal();
+			if (null == pagenum || null == pagesize) {
+				records = resourcesMapper.selectByExample(example);
+				map.put("code", "ok");
+				map.put("resources", records);
+				return map;
+			}
+			PageHelper.startPage(pagenum, pagesize);
 			records = resourcesMapper.selectByExample(example);
+			PageInfo<TResources> page = new PageInfo<TResources>(records);
+			long count = page.getTotal();
 			map.put("code", "ok");
 			map.put("count", count);
 			map.put("resources", records);
