@@ -12,7 +12,7 @@ import com.jk.service.GroupService;
 import com.jk.utils.TxUtils;
 
 @Controller
-@RequestMapping("/resources/group")
+@RequestMapping("/resgroup")
 public class GroupCtrl {
 
 	@Autowired
@@ -20,20 +20,24 @@ public class GroupCtrl {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public Object groupCreate(String name, String remarks) {
-
+	public Object groupAdd(String name, String remarks) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(name) || TxUtils.isEmpty(remarks) || name.length() > 24 || remarks.length() > 255) {
 			map.put("code", "error");
 			map.put("desc", "参数错误");
 			return map;
 		}
-
-		return groupService.addGroup(name, remarks);
-
+		try {
+			return groupService.addGroup(name, remarks);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "添加失败");
+		return map;
 	}
 
-	@RequestMapping("/delete_id")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public Object groupDeleteById(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -42,16 +46,31 @@ public class GroupCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return groupService.deleteGroupById(id);
+		try {
+			return groupService.deleteGroupById(id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "删除失败");
+		return map;
 	}
 
-	@RequestMapping("/select_all")
+	@RequestMapping("/select")
 	@ResponseBody
 	public Object selectGruopAll() {
-		return groupService.selectGruopAll();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			return groupService.selectGruopAll();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 
-	@RequestMapping("/is_group_name_exit")
+	@RequestMapping("/isexit")
 	@ResponseBody
 	public Object isGroupNameExit(String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -60,10 +79,17 @@ public class GroupCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return groupService.isGroupNameExit(name);
+		try {
+			return groupService.isGroupNameExit(name);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 
-	@RequestMapping("/update_group_by_id")
+	@RequestMapping("/update")
 	@ResponseBody
 	public Object updateGroupById(String id, String name, String remarks) {
 
@@ -74,7 +100,13 @@ public class GroupCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-
-		return groupService.updateGroupById(id, name, remarks);
+		try {
+			return groupService.updateGroupById(id, name, remarks);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		map.put("code", "error");
+		map.put("desc", "查询失败");
+		return map;
 	}
 }

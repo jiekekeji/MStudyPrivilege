@@ -9,9 +9,9 @@ com\jk\tbpojo\TGroup.class
 com\jk\tbpojo\TRoleResExample.class
 com\jk\service\GroupService.class
 com\jk\tbpojo\TResourcesExample$Criteria.class
+com\jk\tbpojo\TRoleResExample$Criterion.class
 com\jk\tbpojo\TAdminRoleExample$Criterion.class
 com\jk\tbpojo\TRoleExample$GeneratedCriteria.class
-com\jk\tbpojo\TRoleResExample$Criterion.class
 com\jk\tbpojo\TResourcesExample$GeneratedCriteria.class
 com\jk\tbpojo\TAdminRoleExample.class
 com\jk\tbpojo\TAdminExample$GeneratedCriteria.class

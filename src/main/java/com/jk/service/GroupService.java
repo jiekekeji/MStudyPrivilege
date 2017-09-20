@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jk.tbmapper.TGroupMapper;
 import com.jk.tbmapper.TResourcesMapper;
@@ -21,11 +23,10 @@ public class GroupService {
 
 	@Autowired
 	private TGroupMapper groupMapper;
-
 	@Autowired
 	private TResourcesMapper resourcesMapper;
 
-	public Object addGroup(String name, String remarks) {
+	public Map<String, Object> addGroup(String name, String remarks) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -39,46 +40,44 @@ public class GroupService {
 		if (temp.get("code").equals("error")) {
 			return temp;
 		}
-
-		// 向角色表中添加
-		groupMapper.insert(group);
-
-		map.put("code", "ok");
-		map.put("group", group);
-		return map;
+		try {
+			groupMapper.insert(group);
+			map.put("code", "ok");
+			map.put("desc", "新增成功!");
+			return map;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
-	 * 删除组，如果组下有明细，则需先删除组下的明细
+	 * 删除组，先解除组关系后删除组
 	 * 
 	 * @param id
 	 *            组ID
 	 * @return
 	 */
-	public Object deleteGroupById(String id) {
-
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Map<String, Object> deleteGroupById(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		// 查询该ID下是否有明细
 		TResourcesExample example = new TResourcesExample();
-		example.createCriteria();
 		TResourcesExample.Criteria criteria = example.createCriteria();
 		criteria.andGroupIdEqualTo(id);
-		List<TResources> resources = resourcesMapper.selectByExample(example);
-
-		if (null != resources && resources.size() > 0) {
-			map.put("code", "error");
-			map.put("desc", "请将该组下的子项删除后在删除");
+		TResources record = new TResources();
+		record.setGroupId("");
+		try {
+			// 解除关系
+			resourcesMapper.updateByExampleSelective(record, example);
+			// 执行删除
+			groupMapper.deleteByPrimaryKey(id);
+			map.put("code", "ok");
 			map.put("id", id);
 			return map;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 
-		// 执行删除
-		groupMapper.deleteByPrimaryKey(id);
-
-		map.put("code", "ok");
-		map.put("id", id);
-		return map;
 	}
 
 	/**
@@ -88,27 +87,24 @@ public class GroupService {
 	 * @param name
 	 * @param remarks
 	 * @return
+	 * @throws Exception
 	 */
-	public Object updateGroupById(String id, String name, String remarks) {
+	public Map<String, Object> updateGroupById(String id, String name, String remarks) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		TGroup group = new TGroup();
 		group.setId(id);
 		group.setName(name);
 		group.setRemarks(remarks);
-
-		Map<String, Object> temp = isGroupNameExit(name);
-		if (temp.get("code").equals("error")) {
-			return temp;
+		try {
+			groupMapper.updateByPrimaryKey(group);
+			map.put("code", "ok");
+			map.put("desc", "更新成功");
+			return map;
+		} catch (Exception e) {
+			throw e;
 		}
 
-		// 向角色表中添加
-		groupMapper.updateByPrimaryKey(group);
-
-		map.put("code", "ok");
-		map.put("group", group);
-		return map;
 	}
 
 	/**
@@ -118,20 +114,20 @@ public class GroupService {
 	 * @param name
 	 * @param remarks
 	 * @return
+	 * @throws Exception
 	 */
-	public Object selectGruopAll() {
-
+	public Object selectGruopAll() throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		TGroupExample example = new TGroupExample();
-		Criteria criteria = example.createCriteria();
-
-		// 向角色表中添加
-		List<TGroup> groups = groupMapper.selectByExample(example);
-
-		map.put("code", "ok");
-		map.put("groups", groups);
-		return map;
+		List<TGroup> groups;
+		try {
+			groups = groupMapper.selectByExample(example);
+			map.put("code", "ok");
+			map.put("groups", groups);
+			return map;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -140,20 +136,25 @@ public class GroupService {
 	 * @param name
 	 * @return
 	 */
-	public Map<String, Object> isGroupNameExit(String name) {
-
+	public Map<String, Object> isGroupNameExit(String name) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TGroupExample example = new TGroupExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andNameEqualTo(name);
-		List<TGroup> groups = groupMapper.selectByExample(example);
-		if (null != groups && groups.size() > 0) {
+		List<TGroup> groups;
+		try {
+			groups = groupMapper.selectByExample(example);
+			if (null == groups || groups.size() == 0) {
+				map.put("code", "ok");
+				map.put("desc", "分组名不存在!");
+				return map;
+			}
 			map.put("code", "error");
 			map.put("desc", "分组名已存在!");
 			return map;
+		} catch (Exception e) {
+			throw e;
 		}
-		map.put("code", "ok");
-		return map;
 	}
 
 }
