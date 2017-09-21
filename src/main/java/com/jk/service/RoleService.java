@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jk.tb.mapper.TAdminRoleMapper;
-import com.jk.tb.mapper.TRoleMapper;
-import com.jk.tb.mapper.TRoleResMapper;
+import com.jk.mapper.my.RoleResMapper;
+import com.jk.mapper.tb.TAdminRoleMapper;
+import com.jk.mapper.tb.TRoleMapper;
+import com.jk.mapper.tb.TRoleResMapper;
 import com.jk.tb.pojo.TAdminRole;
 import com.jk.tb.pojo.TAdminRoleExample;
 import com.jk.tb.pojo.TRole;
@@ -29,6 +30,8 @@ public class RoleService {
 	private TRoleResMapper roleResMapper;
 	@Autowired
 	private TAdminRoleMapper adminRoleMapper;
+	@Autowired
+	private RoleResMapper rrsMapper;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> add(String name, String remarks, String[] resourcesIDs) throws Exception {
@@ -150,8 +153,11 @@ public class RoleService {
 		}
 	}
 
-	public Map<String, Object> selectRoleRes(String roleId) throws Exception {
+	public Map<String, Object> selectRoleResByRoleID(String roleId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
+		rrsMapper.selectResourcesByRoleID(roleId);
+		
+		System.out.println(rrsMapper.selectResourcesByRoleID(roleId));
 		return null;
 	}
 

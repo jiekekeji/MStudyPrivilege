@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jk.tb.mapper.TResourcesMapper;
+import com.jk.mapper.tb.TResourcesMapper;
 import com.jk.tb.pojo.TResources;
 import com.jk.tb.pojo.TResourcesExample;
 import com.jk.utils.UUIDUtils;

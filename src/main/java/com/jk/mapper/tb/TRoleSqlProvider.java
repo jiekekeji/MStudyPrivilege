@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -16,31 +16,31 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TGroup;
-import com.jk.tb.pojo.TGroupExample;
-import com.jk.tb.pojo.TGroupExample.Criteria;
-import com.jk.tb.pojo.TGroupExample.Criterion;
+import com.jk.tb.pojo.TRole;
+import com.jk.tb.pojo.TRoleExample;
+import com.jk.tb.pojo.TRoleExample.Criteria;
+import com.jk.tb.pojo.TRoleExample.Criterion;
 
-public class TGroupSqlProvider {
+public class TRoleSqlProvider {
 
-    public String countByExample(TGroupExample example) {
+    public String countByExample(TRoleExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_group");
+        FROM("t_role");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TGroupExample example) {
+    public String deleteByExample(TRoleExample example) {
         BEGIN();
-        DELETE_FROM("t_group");
+        DELETE_FROM("t_role");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TGroup record) {
+    public String insertSelective(TRole record) {
         BEGIN();
-        INSERT_INTO("t_group");
+        INSERT_INTO("t_role");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
@@ -57,7 +57,7 @@ public class TGroupSqlProvider {
         return SQL();
     }
 
-    public String selectByExample(TGroupExample example) {
+    public String selectByExample(TRoleExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
@@ -66,7 +66,7 @@ public class TGroupSqlProvider {
         }
         SELECT("name");
         SELECT("remarks");
-        FROM("t_group");
+        FROM("t_role");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -77,11 +77,11 @@ public class TGroupSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TGroup record = (TGroup) parameter.get("record");
-        TGroupExample example = (TGroupExample) parameter.get("example");
+        TRole record = (TRole) parameter.get("record");
+        TRoleExample example = (TRoleExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_group");
+        UPDATE("t_role");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
@@ -101,20 +101,20 @@ public class TGroupSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_group");
+        UPDATE("t_role");
         
         SET("id = #{record.id,jdbcType=CHAR}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
         SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         
-        TGroupExample example = (TGroupExample) parameter.get("example");
+        TRoleExample example = (TRoleExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TGroup record) {
+    public String updateByPrimaryKeySelective(TRole record) {
         BEGIN();
-        UPDATE("t_group");
+        UPDATE("t_role");
         
         if (record.getName() != null) {
             SET("name = #{name,jdbcType=VARCHAR}");
@@ -129,7 +129,7 @@ public class TGroupSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TGroupExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TRoleExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

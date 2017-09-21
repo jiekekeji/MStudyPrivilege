@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -16,67 +16,57 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TAdmin;
-import com.jk.tb.pojo.TAdminExample;
-import com.jk.tb.pojo.TAdminExample.Criteria;
-import com.jk.tb.pojo.TAdminExample.Criterion;
+import com.jk.tb.pojo.TAdminRole;
+import com.jk.tb.pojo.TAdminRoleExample;
+import com.jk.tb.pojo.TAdminRoleExample.Criteria;
+import com.jk.tb.pojo.TAdminRoleExample.Criterion;
 
-public class TAdminSqlProvider {
+public class TAdminRoleSqlProvider {
 
-    public String countByExample(TAdminExample example) {
+    public String countByExample(TAdminRoleExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_admin");
+        FROM("t_admin_role");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TAdminExample example) {
+    public String deleteByExample(TAdminRoleExample example) {
         BEGIN();
-        DELETE_FROM("t_admin");
+        DELETE_FROM("t_admin_role");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TAdmin record) {
+    public String insertSelective(TAdminRole record) {
         BEGIN();
-        INSERT_INTO("t_admin");
+        INSERT_INTO("t_admin_role");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
         }
         
-        if (record.getName() != null) {
-            VALUES("name", "#{name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            VALUES("role_id", "#{roleId,jdbcType=CHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPhone() != null) {
-            VALUES("phone", "#{phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            VALUES("qq", "#{qq,jdbcType=VARCHAR}");
+        if (record.getAdminId() != null) {
+            VALUES("admin_id", "#{adminId,jdbcType=CHAR}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(TAdminExample example) {
+    public String selectByExample(TAdminRoleExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
         } else {
             SELECT("id");
         }
-        SELECT("name");
-        SELECT("remarks");
-        SELECT("phone");
-        SELECT("qq");
-        FROM("t_admin");
+        SELECT("role_id");
+        SELECT("admin_id");
+        FROM("t_admin_role");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -87,30 +77,22 @@ public class TAdminSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TAdmin record = (TAdmin) parameter.get("record");
-        TAdminExample example = (TAdminExample) parameter.get("example");
+        TAdminRole record = (TAdminRole) parameter.get("record");
+        TAdminRoleExample example = (TAdminRoleExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_admin_role");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
         }
         
-        if (record.getName() != null) {
-            SET("name = #{record.name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            SET("role_id = #{record.roleId,jdbcType=CHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPhone() != null) {
-            SET("phone = #{record.phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        if (record.getAdminId() != null) {
+            SET("admin_id = #{record.adminId,jdbcType=CHAR}");
         }
         
         applyWhere(example, true);
@@ -119,37 +101,27 @@ public class TAdminSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_admin_role");
         
         SET("id = #{record.id,jdbcType=CHAR}");
-        SET("name = #{record.name,jdbcType=VARCHAR}");
-        SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
-        SET("phone = #{record.phone,jdbcType=CHAR}");
-        SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        SET("role_id = #{record.roleId,jdbcType=CHAR}");
+        SET("admin_id = #{record.adminId,jdbcType=CHAR}");
         
-        TAdminExample example = (TAdminExample) parameter.get("example");
+        TAdminRoleExample example = (TAdminRoleExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TAdmin record) {
+    public String updateByPrimaryKeySelective(TAdminRole record) {
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_admin_role");
         
-        if (record.getName() != null) {
-            SET("name = #{name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            SET("role_id = #{roleId,jdbcType=CHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            SET("remarks = #{remarks,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPhone() != null) {
-            SET("phone = #{phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            SET("qq = #{qq,jdbcType=VARCHAR}");
+        if (record.getAdminId() != null) {
+            SET("admin_id = #{adminId,jdbcType=CHAR}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");
@@ -157,7 +129,7 @@ public class TAdminSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TAdminExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TAdminRoleExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

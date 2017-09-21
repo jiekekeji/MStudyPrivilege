@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -16,57 +16,62 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TAdminRole;
-import com.jk.tb.pojo.TAdminRoleExample;
-import com.jk.tb.pojo.TAdminRoleExample.Criteria;
-import com.jk.tb.pojo.TAdminRoleExample.Criterion;
+import com.jk.tb.pojo.TResources;
+import com.jk.tb.pojo.TResourcesExample;
+import com.jk.tb.pojo.TResourcesExample.Criteria;
+import com.jk.tb.pojo.TResourcesExample.Criterion;
 
-public class TAdminRoleSqlProvider {
+public class TResourcesSqlProvider {
 
-    public String countByExample(TAdminRoleExample example) {
+    public String countByExample(TResourcesExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_admin_role");
+        FROM("t_resources");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TAdminRoleExample example) {
+    public String deleteByExample(TResourcesExample example) {
         BEGIN();
-        DELETE_FROM("t_admin_role");
+        DELETE_FROM("t_resources");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TAdminRole record) {
+    public String insertSelective(TResources record) {
         BEGIN();
-        INSERT_INTO("t_admin_role");
+        INSERT_INTO("t_resources");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
         }
         
-        if (record.getRoleId() != null) {
-            VALUES("role_id", "#{roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getAdminId() != null) {
-            VALUES("admin_id", "#{adminId,jdbcType=CHAR}");
+        if (record.getUrl() != null) {
+            VALUES("url", "#{url,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGroupId() != null) {
+            VALUES("group_id", "#{groupId,jdbcType=CHAR}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(TAdminRoleExample example) {
+    public String selectByExample(TResourcesExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
         } else {
             SELECT("id");
         }
-        SELECT("role_id");
-        SELECT("admin_id");
-        FROM("t_admin_role");
+        SELECT("name");
+        SELECT("url");
+        SELECT("group_id");
+        FROM("t_resources");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -77,22 +82,26 @@ public class TAdminRoleSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TAdminRole record = (TAdminRole) parameter.get("record");
-        TAdminRoleExample example = (TAdminRoleExample) parameter.get("example");
+        TResources record = (TResources) parameter.get("record");
+        TResourcesExample example = (TResourcesExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_admin_role");
+        UPDATE("t_resources");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
         }
         
-        if (record.getRoleId() != null) {
-            SET("role_id = #{record.roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
-        if (record.getAdminId() != null) {
-            SET("admin_id = #{record.adminId,jdbcType=CHAR}");
+        if (record.getUrl() != null) {
+            SET("url = #{record.url,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGroupId() != null) {
+            SET("group_id = #{record.groupId,jdbcType=CHAR}");
         }
         
         applyWhere(example, true);
@@ -101,27 +110,32 @@ public class TAdminRoleSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_admin_role");
+        UPDATE("t_resources");
         
         SET("id = #{record.id,jdbcType=CHAR}");
-        SET("role_id = #{record.roleId,jdbcType=CHAR}");
-        SET("admin_id = #{record.adminId,jdbcType=CHAR}");
+        SET("name = #{record.name,jdbcType=VARCHAR}");
+        SET("url = #{record.url,jdbcType=VARCHAR}");
+        SET("group_id = #{record.groupId,jdbcType=CHAR}");
         
-        TAdminRoleExample example = (TAdminRoleExample) parameter.get("example");
+        TResourcesExample example = (TResourcesExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TAdminRole record) {
+    public String updateByPrimaryKeySelective(TResources record) {
         BEGIN();
-        UPDATE("t_admin_role");
+        UPDATE("t_resources");
         
-        if (record.getRoleId() != null) {
-            SET("role_id = #{roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            SET("name = #{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getAdminId() != null) {
-            SET("admin_id = #{adminId,jdbcType=CHAR}");
+        if (record.getUrl() != null) {
+            SET("url = #{url,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGroupId() != null) {
+            SET("group_id = #{groupId,jdbcType=CHAR}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");
@@ -129,7 +143,7 @@ public class TAdminRoleSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TAdminRoleExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TResourcesExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

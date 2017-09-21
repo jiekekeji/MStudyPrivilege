@@ -76,7 +76,26 @@ public class RoleCtrl {
 			map.put("desc", "系统异常");
 			return map;
 		}
+	}
 
+	@RequestMapping("/selectroleres")
+	@ResponseBody
+	public Object selectRoleResByRoleID(String roleid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(roleid) || roleid.length() != 32) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
+		try {
+			roleService.selectRoleResByRoleID(roleid);
+			return map;
+		} catch (Exception e) {
+			System.err.println(e);
+			map.put("code", "error");
+			map.put("desc", "系统异常");
+			return map;
+		}
 	}
 
 }

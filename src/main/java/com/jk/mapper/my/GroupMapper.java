@@ -1,4 +1,4 @@
-package com.jk.mapper;
+package com.jk.mapper.my;
 
 public interface GroupMapper {
 	

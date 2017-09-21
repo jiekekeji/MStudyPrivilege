@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -16,31 +16,31 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TRole;
-import com.jk.tb.pojo.TRoleExample;
-import com.jk.tb.pojo.TRoleExample.Criteria;
-import com.jk.tb.pojo.TRoleExample.Criterion;
+import com.jk.tb.pojo.TAdmin;
+import com.jk.tb.pojo.TAdminExample;
+import com.jk.tb.pojo.TAdminExample.Criteria;
+import com.jk.tb.pojo.TAdminExample.Criterion;
 
-public class TRoleSqlProvider {
+public class TAdminSqlProvider {
 
-    public String countByExample(TRoleExample example) {
+    public String countByExample(TAdminExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_role");
+        FROM("t_admin");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TRoleExample example) {
+    public String deleteByExample(TAdminExample example) {
         BEGIN();
-        DELETE_FROM("t_role");
+        DELETE_FROM("t_admin");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TRole record) {
+    public String insertSelective(TAdmin record) {
         BEGIN();
-        INSERT_INTO("t_role");
+        INSERT_INTO("t_admin");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
@@ -54,10 +54,18 @@ public class TRoleSqlProvider {
             VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
         }
         
+        if (record.getPhone() != null) {
+            VALUES("phone", "#{phone,jdbcType=CHAR}");
+        }
+        
+        if (record.getQq() != null) {
+            VALUES("qq", "#{qq,jdbcType=VARCHAR}");
+        }
+        
         return SQL();
     }
 
-    public String selectByExample(TRoleExample example) {
+    public String selectByExample(TAdminExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
@@ -66,7 +74,9 @@ public class TRoleSqlProvider {
         }
         SELECT("name");
         SELECT("remarks");
-        FROM("t_role");
+        SELECT("phone");
+        SELECT("qq");
+        FROM("t_admin");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -77,11 +87,11 @@ public class TRoleSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TRole record = (TRole) parameter.get("record");
-        TRoleExample example = (TRoleExample) parameter.get("example");
+        TAdmin record = (TAdmin) parameter.get("record");
+        TAdminExample example = (TAdminExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_role");
+        UPDATE("t_admin");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
@@ -95,26 +105,36 @@ public class TRoleSqlProvider {
             SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
         
+        if (record.getPhone() != null) {
+            SET("phone = #{record.phone,jdbcType=CHAR}");
+        }
+        
+        if (record.getQq() != null) {
+            SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_role");
+        UPDATE("t_admin");
         
         SET("id = #{record.id,jdbcType=CHAR}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
         SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        SET("phone = #{record.phone,jdbcType=CHAR}");
+        SET("qq = #{record.qq,jdbcType=VARCHAR}");
         
-        TRoleExample example = (TRoleExample) parameter.get("example");
+        TAdminExample example = (TAdminExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TRole record) {
+    public String updateByPrimaryKeySelective(TAdmin record) {
         BEGIN();
-        UPDATE("t_role");
+        UPDATE("t_admin");
         
         if (record.getName() != null) {
             SET("name = #{name,jdbcType=VARCHAR}");
@@ -124,12 +144,20 @@ public class TRoleSqlProvider {
             SET("remarks = #{remarks,jdbcType=VARCHAR}");
         }
         
+        if (record.getPhone() != null) {
+            SET("phone = #{phone,jdbcType=CHAR}");
+        }
+        
+        if (record.getQq() != null) {
+            SET("qq = #{qq,jdbcType=VARCHAR}");
+        }
+        
         WHERE("id = #{id,jdbcType=CHAR}");
         
         return SQL();
     }
 
-    protected void applyWhere(TRoleExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TAdminExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

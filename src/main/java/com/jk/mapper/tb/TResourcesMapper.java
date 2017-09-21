@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;

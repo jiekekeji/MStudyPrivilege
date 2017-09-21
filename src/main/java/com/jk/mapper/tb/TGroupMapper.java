@@ -1,4 +1,4 @@
-package com.jk.tb.mapper;
+package com.jk.mapper.tb;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
@@ -14,43 +14,43 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TRole;
-import com.jk.tb.pojo.TRoleExample;
+import com.jk.tb.pojo.TGroup;
+import com.jk.tb.pojo.TGroupExample;
 
-public interface TRoleMapper {
-    @SelectProvider(type=TRoleSqlProvider.class, method="countByExample")
-    int countByExample(TRoleExample example);
+public interface TGroupMapper {
+    @SelectProvider(type=TGroupSqlProvider.class, method="countByExample")
+    int countByExample(TGroupExample example);
 
-    @DeleteProvider(type=TRoleSqlProvider.class, method="deleteByExample")
-    int deleteByExample(TRoleExample example);
+    @DeleteProvider(type=TGroupSqlProvider.class, method="deleteByExample")
+    int deleteByExample(TGroupExample example);
 
     @Delete({
-        "delete from t_role",
+        "delete from t_group",
         "where id = #{id,jdbcType=CHAR}"
     })
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "insert into t_role (id, name, remarks)",
+        "insert into t_group (id, name, remarks)",
         "values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})"
     })
-    int insert(TRole record);
+    int insert(TGroup record);
 
-    @InsertProvider(type=TRoleSqlProvider.class, method="insertSelective")
-    int insertSelective(TRole record);
+    @InsertProvider(type=TGroupSqlProvider.class, method="insertSelective")
+    int insertSelective(TGroup record);
 
-    @SelectProvider(type=TRoleSqlProvider.class, method="selectByExample")
+    @SelectProvider(type=TGroupSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR)
     })
-    List<TRole> selectByExample(TRoleExample example);
+    List<TGroup> selectByExample(TGroupExample example);
 
     @Select({
         "select",
         "id, name, remarks",
-        "from t_role",
+        "from t_group",
         "where id = #{id,jdbcType=CHAR}"
     })
     @Results({
@@ -58,22 +58,22 @@ public interface TRoleMapper {
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR)
     })
-    TRole selectByPrimaryKey(String id);
+    TGroup selectByPrimaryKey(String id);
 
-    @UpdateProvider(type=TRoleSqlProvider.class, method="updateByExampleSelective")
-    int updateByExampleSelective(@Param("record") TRole record, @Param("example") TRoleExample example);
+    @UpdateProvider(type=TGroupSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") TGroup record, @Param("example") TGroupExample example);
 
-    @UpdateProvider(type=TRoleSqlProvider.class, method="updateByExample")
-    int updateByExample(@Param("record") TRole record, @Param("example") TRoleExample example);
+    @UpdateProvider(type=TGroupSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") TGroup record, @Param("example") TGroupExample example);
 
-    @UpdateProvider(type=TRoleSqlProvider.class, method="updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(TRole record);
+    @UpdateProvider(type=TGroupSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(TGroup record);
 
     @Update({
-        "update t_role",
+        "update t_group",
         "set name = #{name,jdbcType=VARCHAR},",
           "remarks = #{remarks,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=CHAR}"
     })
-    int updateByPrimaryKey(TRole record);
+    int updateByPrimaryKey(TGroup record);
 }

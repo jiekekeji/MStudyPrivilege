@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jk.tb.mapper.TGroupMapper;
-import com.jk.tb.mapper.TResourcesMapper;
+import com.jk.mapper.tb.TGroupMapper;
+import com.jk.mapper.tb.TResourcesMapper;
 import com.jk.tb.pojo.TGroup;
 import com.jk.tb.pojo.TGroupExample;
 import com.jk.tb.pojo.TResources;
