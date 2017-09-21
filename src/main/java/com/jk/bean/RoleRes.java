@@ -6,17 +6,8 @@ import com.jk.tb.pojo.TResources;
 
 public class RoleRes {
 
-	private String id;
 	private String roleId;
 	private List<TResources> resources;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id == null ? null : id.trim();
-	}
 
 	public String getRoleId() {
 		return roleId;
@@ -36,7 +27,7 @@ public class RoleRes {
 
 	@Override
 	public String toString() {
-		return "RoleRes [id=" + id + ", roleId=" + roleId + ", resources=" + resources + "]";
+		return "RoleRes [roleId=" + roleId + ", resources=" + resources + "]";
 	}
 
 }

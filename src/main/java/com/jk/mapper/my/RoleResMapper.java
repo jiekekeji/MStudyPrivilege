@@ -21,8 +21,9 @@ public interface RoleResMapper {
 	
 	
 	@Select("SELECT * from t_role_res WHERE role_id=#{roleId}")
-	@Results({ @Result(id = true, column = "role_id", property = "roleId"),
-			// @Result(column = "res_id", property = "resID"),
+	@Results({ 
+		    @Result(id = true, column = "role_id", property = "roleId"),
+//			@Result(column = "role_id", property = "role_id"),
 			@Result(column = "res_id", property = "resources", many = @Many(select = "com.jk.mapper.my.RoleResMapper.selectTResourcesById") ), })
 	RoleRes selectResourcesByRoleID(String roleId);
 }
