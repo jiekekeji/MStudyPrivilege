@@ -1,7 +1,5 @@
-package com.jk.tbmapper;
+package com.jk.tb.mapper;
 
-import com.jk.tbpojo.TAdminRole;
-import com.jk.tbpojo.TAdminRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -15,6 +13,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+
+import com.jk.tb.pojo.TAdminRole;
+import com.jk.tb.pojo.TAdminRoleExample;
 
 public interface TAdminRoleMapper {
     @SelectProvider(type=TAdminRoleSqlProvider.class, method="countByExample")

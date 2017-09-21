@@ -1,4 +1,4 @@
-package com.jk.tbpojo;
+package com.jk.tb.pojo;
 
 public class TResources {
     private String id;

@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jk.tbmapper.TGroupMapper;
-import com.jk.tbmapper.TResourcesMapper;
-import com.jk.tbpojo.TGroup;
-import com.jk.tbpojo.TGroupExample;
-import com.jk.tbpojo.TGroupExample.Criteria;
-import com.jk.tbpojo.TResources;
-import com.jk.tbpojo.TResourcesExample;
+import com.jk.tb.mapper.TGroupMapper;
+import com.jk.tb.mapper.TResourcesMapper;
+import com.jk.tb.pojo.TGroup;
+import com.jk.tb.pojo.TGroupExample;
+import com.jk.tb.pojo.TResources;
+import com.jk.tb.pojo.TResourcesExample;
+import com.jk.tb.pojo.TGroupExample.Criteria;
 import com.jk.utils.UUIDUtils;
 
 @Service

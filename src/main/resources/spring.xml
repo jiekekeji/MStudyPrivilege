@@ -44,7 +44,7 @@
 	<!-- 遵循规范:将mapper.java和mapper.xml映射文件名称保持一致,且在一个目录中自动扫描出来的mapper的bean的id为mapper类名 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 指定扫描的包名 如果扫描多个包,每个包中间使用半角逗号分隔 -->
-		<property name="basePackage" value="com.jk.tbmapper" />
+		<property name="basePackage" value="com.jk.tb.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	<!-- *******end mybatis的配置********* -->

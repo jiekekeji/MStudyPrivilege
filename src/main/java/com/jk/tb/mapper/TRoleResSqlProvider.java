@@ -1,4 +1,4 @@
-package com.jk.tbmapper;
+package com.jk.tb.mapper;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -13,64 +13,60 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.jk.tbpojo.TResources;
-import com.jk.tbpojo.TResourcesExample.Criteria;
-import com.jk.tbpojo.TResourcesExample.Criterion;
-import com.jk.tbpojo.TResourcesExample;
 import java.util.List;
 import java.util.Map;
 
-public class TResourcesSqlProvider {
+import com.jk.tb.pojo.TRoleRes;
+import com.jk.tb.pojo.TRoleResExample;
+import com.jk.tb.pojo.TRoleResExample.Criteria;
+import com.jk.tb.pojo.TRoleResExample.Criterion;
 
-    public String countByExample(TResourcesExample example) {
+public class TRoleResSqlProvider {
+
+    public String countByExample(TRoleResExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_resources");
+        FROM("t_role_res");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TResourcesExample example) {
+    public String deleteByExample(TRoleResExample example) {
         BEGIN();
-        DELETE_FROM("t_resources");
+        DELETE_FROM("t_role_res");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TResources record) {
+    public String insertSelective(TRoleRes record) {
         BEGIN();
-        INSERT_INTO("t_resources");
+        INSERT_INTO("t_role_res");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
         }
         
-        if (record.getName() != null) {
-            VALUES("name", "#{name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            VALUES("role_id", "#{roleId,jdbcType=CHAR}");
         }
         
-        if (record.getUrl() != null) {
-            VALUES("url", "#{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGroupId() != null) {
-            VALUES("group_id", "#{groupId,jdbcType=CHAR}");
+        if (record.getResId() != null) {
+            VALUES("res_id", "#{resId,jdbcType=CHAR}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(TResourcesExample example) {
+    public String selectByExample(TRoleResExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
         } else {
             SELECT("id");
         }
-        SELECT("name");
-        SELECT("url");
-        SELECT("group_id");
-        FROM("t_resources");
+        SELECT("role_id");
+        SELECT("res_id");
+        FROM("t_role_res");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -81,26 +77,22 @@ public class TResourcesSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TResources record = (TResources) parameter.get("record");
-        TResourcesExample example = (TResourcesExample) parameter.get("example");
+        TRoleRes record = (TRoleRes) parameter.get("record");
+        TRoleResExample example = (TRoleResExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_resources");
+        UPDATE("t_role_res");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
         }
         
-        if (record.getName() != null) {
-            SET("name = #{record.name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            SET("role_id = #{record.roleId,jdbcType=CHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("url = #{record.url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGroupId() != null) {
-            SET("group_id = #{record.groupId,jdbcType=CHAR}");
+        if (record.getResId() != null) {
+            SET("res_id = #{record.resId,jdbcType=CHAR}");
         }
         
         applyWhere(example, true);
@@ -109,32 +101,27 @@ public class TResourcesSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_resources");
+        UPDATE("t_role_res");
         
         SET("id = #{record.id,jdbcType=CHAR}");
-        SET("name = #{record.name,jdbcType=VARCHAR}");
-        SET("url = #{record.url,jdbcType=VARCHAR}");
-        SET("group_id = #{record.groupId,jdbcType=CHAR}");
+        SET("role_id = #{record.roleId,jdbcType=CHAR}");
+        SET("res_id = #{record.resId,jdbcType=CHAR}");
         
-        TResourcesExample example = (TResourcesExample) parameter.get("example");
+        TRoleResExample example = (TRoleResExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TResources record) {
+    public String updateByPrimaryKeySelective(TRoleRes record) {
         BEGIN();
-        UPDATE("t_resources");
+        UPDATE("t_role_res");
         
-        if (record.getName() != null) {
-            SET("name = #{name,jdbcType=VARCHAR}");
+        if (record.getRoleId() != null) {
+            SET("role_id = #{roleId,jdbcType=CHAR}");
         }
         
-        if (record.getUrl() != null) {
-            SET("url = #{url,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGroupId() != null) {
-            SET("group_id = #{groupId,jdbcType=CHAR}");
+        if (record.getResId() != null) {
+            SET("res_id = #{resId,jdbcType=CHAR}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");
@@ -142,7 +129,7 @@ public class TResourcesSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TResourcesExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TRoleResExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

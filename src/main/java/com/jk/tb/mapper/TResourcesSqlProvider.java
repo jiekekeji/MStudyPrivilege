@@ -1,4 +1,4 @@
-package com.jk.tbmapper;
+package com.jk.tb.mapper;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -13,33 +13,34 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.jk.tbpojo.TAdmin;
-import com.jk.tbpojo.TAdminExample.Criteria;
-import com.jk.tbpojo.TAdminExample.Criterion;
-import com.jk.tbpojo.TAdminExample;
 import java.util.List;
 import java.util.Map;
 
-public class TAdminSqlProvider {
+import com.jk.tb.pojo.TResources;
+import com.jk.tb.pojo.TResourcesExample;
+import com.jk.tb.pojo.TResourcesExample.Criteria;
+import com.jk.tb.pojo.TResourcesExample.Criterion;
 
-    public String countByExample(TAdminExample example) {
+public class TResourcesSqlProvider {
+
+    public String countByExample(TResourcesExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_admin");
+        FROM("t_resources");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TAdminExample example) {
+    public String deleteByExample(TResourcesExample example) {
         BEGIN();
-        DELETE_FROM("t_admin");
+        DELETE_FROM("t_resources");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TAdmin record) {
+    public String insertSelective(TResources record) {
         BEGIN();
-        INSERT_INTO("t_admin");
+        INSERT_INTO("t_resources");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
@@ -49,22 +50,18 @@ public class TAdminSqlProvider {
             VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            VALUES("url", "#{url,jdbcType=VARCHAR}");
         }
         
-        if (record.getPhone() != null) {
-            VALUES("phone", "#{phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            VALUES("qq", "#{qq,jdbcType=VARCHAR}");
+        if (record.getGroupId() != null) {
+            VALUES("group_id", "#{groupId,jdbcType=CHAR}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(TAdminExample example) {
+    public String selectByExample(TResourcesExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
@@ -72,10 +69,9 @@ public class TAdminSqlProvider {
             SELECT("id");
         }
         SELECT("name");
-        SELECT("remarks");
-        SELECT("phone");
-        SELECT("qq");
-        FROM("t_admin");
+        SELECT("url");
+        SELECT("group_id");
+        FROM("t_resources");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -86,11 +82,11 @@ public class TAdminSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TAdmin record = (TAdmin) parameter.get("record");
-        TAdminExample example = (TAdminExample) parameter.get("example");
+        TResources record = (TResources) parameter.get("record");
+        TResourcesExample example = (TResourcesExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_resources");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
@@ -100,16 +96,12 @@ public class TAdminSqlProvider {
             SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            SET("url = #{record.url,jdbcType=VARCHAR}");
         }
         
-        if (record.getPhone() != null) {
-            SET("phone = #{record.phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        if (record.getGroupId() != null) {
+            SET("group_id = #{record.groupId,jdbcType=CHAR}");
         }
         
         applyWhere(example, true);
@@ -118,37 +110,32 @@ public class TAdminSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_resources");
         
         SET("id = #{record.id,jdbcType=CHAR}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
-        SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
-        SET("phone = #{record.phone,jdbcType=CHAR}");
-        SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        SET("url = #{record.url,jdbcType=VARCHAR}");
+        SET("group_id = #{record.groupId,jdbcType=CHAR}");
         
-        TAdminExample example = (TAdminExample) parameter.get("example");
+        TResourcesExample example = (TResourcesExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TAdmin record) {
+    public String updateByPrimaryKeySelective(TResources record) {
         BEGIN();
-        UPDATE("t_admin");
+        UPDATE("t_resources");
         
         if (record.getName() != null) {
             SET("name = #{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getRemarks() != null) {
-            SET("remarks = #{remarks,jdbcType=VARCHAR}");
+        if (record.getUrl() != null) {
+            SET("url = #{url,jdbcType=VARCHAR}");
         }
         
-        if (record.getPhone() != null) {
-            SET("phone = #{phone,jdbcType=CHAR}");
-        }
-        
-        if (record.getQq() != null) {
-            SET("qq = #{qq,jdbcType=VARCHAR}");
+        if (record.getGroupId() != null) {
+            SET("group_id = #{groupId,jdbcType=CHAR}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");
@@ -156,7 +143,7 @@ public class TAdminSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TAdminExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TResourcesExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

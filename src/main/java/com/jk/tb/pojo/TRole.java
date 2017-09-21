@@ -1,11 +1,11 @@
-package com.jk.tbpojo;
+package com.jk.tb.pojo;
 
-public class TAdminRole {
+public class TRole {
     private String id;
 
-    private String roleId;
+    private String name;
 
-    private String adminId;
+    private String remarks;
 
     public String getId() {
         return id;
@@ -15,20 +15,20 @@ public class TAdminRole {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getAdminId() {
-        return adminId;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId == null ? null : adminId.trim();
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     @Override
@@ -38,8 +38,8 @@ public class TAdminRole {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", adminId=").append(adminId);
+        sb.append(", name=").append(name);
+        sb.append(", remarks=").append(remarks);
         sb.append("]");
         return sb.toString();
     }
@@ -55,10 +55,10 @@ public class TAdminRole {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TAdminRole other = (TAdminRole) that;
+        TRole other = (TRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getAdminId() == null ? other.getAdminId() == null : this.getAdminId().equals(other.getAdminId()));
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
     }
 
     @Override
@@ -66,8 +66,8 @@ public class TAdminRole {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
-        result = prime * result + ((getAdminId() == null) ? 0 : getAdminId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
         return result;
     }
 }

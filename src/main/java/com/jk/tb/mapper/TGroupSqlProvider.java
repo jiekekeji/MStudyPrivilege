@@ -1,4 +1,4 @@
-package com.jk.tbmapper;
+package com.jk.tb.mapper;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
 import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
@@ -13,59 +13,60 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import com.jk.tbpojo.TRoleRes;
-import com.jk.tbpojo.TRoleResExample.Criteria;
-import com.jk.tbpojo.TRoleResExample.Criterion;
-import com.jk.tbpojo.TRoleResExample;
 import java.util.List;
 import java.util.Map;
 
-public class TRoleResSqlProvider {
+import com.jk.tb.pojo.TGroup;
+import com.jk.tb.pojo.TGroupExample;
+import com.jk.tb.pojo.TGroupExample.Criteria;
+import com.jk.tb.pojo.TGroupExample.Criterion;
 
-    public String countByExample(TRoleResExample example) {
+public class TGroupSqlProvider {
+
+    public String countByExample(TGroupExample example) {
         BEGIN();
         SELECT("count(*)");
-        FROM("t_role_res");
+        FROM("t_group");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String deleteByExample(TRoleResExample example) {
+    public String deleteByExample(TGroupExample example) {
         BEGIN();
-        DELETE_FROM("t_role_res");
+        DELETE_FROM("t_group");
         applyWhere(example, false);
         return SQL();
     }
 
-    public String insertSelective(TRoleRes record) {
+    public String insertSelective(TGroup record) {
         BEGIN();
-        INSERT_INTO("t_role_res");
+        INSERT_INTO("t_group");
         
         if (record.getId() != null) {
             VALUES("id", "#{id,jdbcType=CHAR}");
         }
         
-        if (record.getRoleId() != null) {
-            VALUES("role_id", "#{roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getResId() != null) {
-            VALUES("res_id", "#{resId,jdbcType=CHAR}");
+        if (record.getRemarks() != null) {
+            VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
         }
         
         return SQL();
     }
 
-    public String selectByExample(TRoleResExample example) {
+    public String selectByExample(TGroupExample example) {
         BEGIN();
         if (example != null && example.isDistinct()) {
             SELECT_DISTINCT("id");
         } else {
             SELECT("id");
         }
-        SELECT("role_id");
-        SELECT("res_id");
-        FROM("t_role_res");
+        SELECT("name");
+        SELECT("remarks");
+        FROM("t_group");
         applyWhere(example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -76,22 +77,22 @@ public class TRoleResSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        TRoleRes record = (TRoleRes) parameter.get("record");
-        TRoleResExample example = (TRoleResExample) parameter.get("example");
+        TGroup record = (TGroup) parameter.get("record");
+        TGroupExample example = (TGroupExample) parameter.get("example");
         
         BEGIN();
-        UPDATE("t_role_res");
+        UPDATE("t_group");
         
         if (record.getId() != null) {
             SET("id = #{record.id,jdbcType=CHAR}");
         }
         
-        if (record.getRoleId() != null) {
-            SET("role_id = #{record.roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
-        if (record.getResId() != null) {
-            SET("res_id = #{record.resId,jdbcType=CHAR}");
+        if (record.getRemarks() != null) {
+            SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
         
         applyWhere(example, true);
@@ -100,27 +101,27 @@ public class TRoleResSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         BEGIN();
-        UPDATE("t_role_res");
+        UPDATE("t_group");
         
         SET("id = #{record.id,jdbcType=CHAR}");
-        SET("role_id = #{record.roleId,jdbcType=CHAR}");
-        SET("res_id = #{record.resId,jdbcType=CHAR}");
+        SET("name = #{record.name,jdbcType=VARCHAR}");
+        SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         
-        TRoleResExample example = (TRoleResExample) parameter.get("example");
+        TGroupExample example = (TGroupExample) parameter.get("example");
         applyWhere(example, true);
         return SQL();
     }
 
-    public String updateByPrimaryKeySelective(TRoleRes record) {
+    public String updateByPrimaryKeySelective(TGroup record) {
         BEGIN();
-        UPDATE("t_role_res");
+        UPDATE("t_group");
         
-        if (record.getRoleId() != null) {
-            SET("role_id = #{roleId,jdbcType=CHAR}");
+        if (record.getName() != null) {
+            SET("name = #{name,jdbcType=VARCHAR}");
         }
         
-        if (record.getResId() != null) {
-            SET("res_id = #{resId,jdbcType=CHAR}");
+        if (record.getRemarks() != null) {
+            SET("remarks = #{remarks,jdbcType=VARCHAR}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");
@@ -128,7 +129,7 @@ public class TRoleResSqlProvider {
         return SQL();
     }
 
-    protected void applyWhere(TRoleResExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(TGroupExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

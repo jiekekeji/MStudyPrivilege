@@ -29,14 +29,17 @@ public class RoleCtrl {
 		}
 		try {
 			map = roleService.add(name, remarks, resourcesIDs);
+			return map;
 		} catch (Exception e) {
+			System.err.println(e);
 			map.put("code", "error");
-			map.put("desc", "添加失败");
+			map.put("desc", "系统异常");
+			return map;
 		}
-		return map;
+
 	}
 
-	@RequestMapping("/delete_id")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public Object deleteByID(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -45,10 +48,17 @@ public class RoleCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return roleService.deleteByID(id);
+		try {
+			return roleService.deleteByID(id);
+		} catch (Exception e) {
+			System.err.println(e);
+			map.put("code", "error");
+			map.put("desc", "系统异常");
+			return map;
+		}
 	}
 
-	@RequestMapping("/udapte_id")
+	@RequestMapping("/udapte")
 	@ResponseBody
 	public Object udapteByID(String id, String name, String remarks, String[] resourcesIDs) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -58,31 +68,15 @@ public class RoleCtrl {
 			map.put("desc", "参数错误");
 			return map;
 		}
-		return roleService.udapteByID(id, name, remarks, resourcesIDs);
+		try {
+			return roleService.udapteByID(id, name, remarks, resourcesIDs);
+		} catch (Exception e) {
+			System.err.println(e);
+			map.put("code", "error");
+			map.put("desc", "系统异常");
+			return map;
+		}
+
 	}
 
-	/*
-	 * @RequestMapping("/select_id")
-	 * 
-	 * @ResponseBody public Object selectByID(String id) { Map<String, Object>
-	 * map = new HashMap<String, Object>(); if (TxUtils.isEmpty(id) ||
-	 * id.length() != 32) { map.put("code", "error"); map.put("desc", "参数错误");
-	 * return map; } return resourcesService.selectByID(id); }
-	 * 
-	 * @RequestMapping("/is_name_exit")
-	 * 
-	 * @ResponseBody public Object isRoleNameExit(String name) { Map<String,
-	 * Object> map = new HashMap<String, Object>(); if (TxUtils.isEmpty(name) ||
-	 * name.length() > 36) { map.put("code", "error"); map.put("desc", "参数错误");
-	 * return map; }
-	 * 
-	 * return resourcesService.isResourcesNameExit(name);
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping("/select_all")
-	 * 
-	 * @ResponseBody public Object selectAll() { return
-	 * resourcesService.selectAll(); }
-	 */
 }

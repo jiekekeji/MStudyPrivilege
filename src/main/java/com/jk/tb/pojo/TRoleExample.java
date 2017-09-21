@@ -1,16 +1,16 @@
-package com.jk.tbpojo;
+package com.jk.tb.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TGroupExample {
+public class TRoleExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TGroupExample() {
+    public TRoleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

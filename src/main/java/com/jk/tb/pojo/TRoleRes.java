@@ -1,11 +1,11 @@
-package com.jk.tbpojo;
+package com.jk.tb.pojo;
 
-public class TGroup {
+public class TRoleRes {
     private String id;
 
-    private String name;
+    private String roleId;
 
-    private String remarks;
+    private String resId;
 
     public String getId() {
         return id;
@@ -15,20 +15,20 @@ public class TGroup {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getResId() {
+        return resId;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+    public void setResId(String resId) {
+        this.resId = resId == null ? null : resId.trim();
     }
 
     @Override
@@ -38,8 +38,8 @@ public class TGroup {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", remarks=").append(remarks);
+        sb.append(", roleId=").append(roleId);
+        sb.append(", resId=").append(resId);
         sb.append("]");
         return sb.toString();
     }
@@ -55,10 +55,10 @@ public class TGroup {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TGroup other = (TGroup) that;
+        TRoleRes other = (TRoleRes) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
+            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
+            && (this.getResId() == null ? other.getResId() == null : this.getResId().equals(other.getResId()));
     }
 
     @Override
@@ -66,8 +66,8 @@ public class TGroup {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
+        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
+        result = prime * result + ((getResId() == null) ? 0 : getResId().hashCode());
         return result;
     }
 }
