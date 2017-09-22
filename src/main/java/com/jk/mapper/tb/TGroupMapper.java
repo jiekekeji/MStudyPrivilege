@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TGroup;
-import com.jk.tb.pojo.TGroupExample;
+import com.jk.pojo.tb.TGroup;
+import com.jk.pojo.tb.TGroupExample;
 
 public interface TGroupMapper {
     @SelectProvider(type=TGroupSqlProvider.class, method="countByExample")

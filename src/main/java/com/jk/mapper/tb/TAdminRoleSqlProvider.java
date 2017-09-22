@@ -16,10 +16,10 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TAdminRole;
-import com.jk.tb.pojo.TAdminRoleExample;
-import com.jk.tb.pojo.TAdminRoleExample.Criteria;
-import com.jk.tb.pojo.TAdminRoleExample.Criterion;
+import com.jk.pojo.tb.TAdminRole;
+import com.jk.pojo.tb.TAdminRoleExample;
+import com.jk.pojo.tb.TAdminRoleExample.Criteria;
+import com.jk.pojo.tb.TAdminRoleExample.Criterion;
 
 public class TAdminRoleSqlProvider {
 

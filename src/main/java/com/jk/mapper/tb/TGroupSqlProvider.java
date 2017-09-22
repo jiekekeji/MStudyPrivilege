@@ -16,10 +16,10 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TGroup;
-import com.jk.tb.pojo.TGroupExample;
-import com.jk.tb.pojo.TGroupExample.Criteria;
-import com.jk.tb.pojo.TGroupExample.Criterion;
+import com.jk.pojo.tb.TGroup;
+import com.jk.pojo.tb.TGroupExample;
+import com.jk.pojo.tb.TGroupExample.Criteria;
+import com.jk.pojo.tb.TGroupExample.Criterion;
 
 public class TGroupSqlProvider {
 

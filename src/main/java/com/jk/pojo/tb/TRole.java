@@ -1,13 +1,11 @@
-package com.jk.tb.pojo;
+package com.jk.pojo.tb;
 
-public class TResources {
+public class TRole {
     private String id;
 
     private String name;
 
-    private String url;
-
-    private String groupId;
+    private String remarks;
 
     public String getId() {
         return id;
@@ -25,20 +23,12 @@ public class TResources {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId == null ? null : groupId.trim();
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     @Override
@@ -49,8 +39,7 @@ public class TResources {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", url=").append(url);
-        sb.append(", groupId=").append(groupId);
+        sb.append(", remarks=").append(remarks);
         sb.append("]");
         return sb.toString();
     }
@@ -66,11 +55,10 @@ public class TResources {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TResources other = (TResources) that;
+        TRole other = (TRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getGroupId() == null ? other.getGroupId() == null : this.getGroupId().equals(other.getGroupId()));
+            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
     }
 
     @Override
@@ -79,8 +67,7 @@ public class TResources {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
-        result = prime * result + ((getGroupId() == null) ? 0 : getGroupId().hashCode());
+        result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
         return result;
     }
 }

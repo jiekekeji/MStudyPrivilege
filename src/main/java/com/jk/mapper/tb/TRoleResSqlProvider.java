@@ -16,10 +16,10 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TRoleRes;
-import com.jk.tb.pojo.TRoleResExample;
-import com.jk.tb.pojo.TRoleResExample.Criteria;
-import com.jk.tb.pojo.TRoleResExample.Criterion;
+import com.jk.pojo.tb.TRoleRes;
+import com.jk.pojo.tb.TRoleResExample;
+import com.jk.pojo.tb.TRoleResExample.Criteria;
+import com.jk.pojo.tb.TRoleResExample.Criterion;
 
 public class TRoleResSqlProvider {
 

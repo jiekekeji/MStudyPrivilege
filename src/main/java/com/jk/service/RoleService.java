@@ -9,17 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jk.mapper.my.RoleResMapper;
 import com.jk.mapper.tb.TAdminRoleMapper;
 import com.jk.mapper.tb.TRoleMapper;
 import com.jk.mapper.tb.TRoleResMapper;
-import com.jk.tb.pojo.TAdminRole;
-import com.jk.tb.pojo.TAdminRoleExample;
-import com.jk.tb.pojo.TResources;
-import com.jk.tb.pojo.TRole;
-import com.jk.tb.pojo.TRoleExample;
-import com.jk.tb.pojo.TRoleRes;
-import com.jk.tb.pojo.TRoleResExample;
+import com.jk.pojo.my.RoleRes;
+import com.jk.pojo.tb.TAdminRole;
+import com.jk.pojo.tb.TAdminRoleExample;
+import com.jk.pojo.tb.TResources;
+import com.jk.pojo.tb.TRole;
+import com.jk.pojo.tb.TRoleExample;
+import com.jk.pojo.tb.TRoleRes;
+import com.jk.pojo.tb.TRoleResExample;
 import com.jk.utils.UUIDUtils;
 
 @Service
@@ -156,10 +159,39 @@ public class RoleService {
 
 	public Map<String, Object> selectRoleResByRoleID(String roleid) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<TResources> resources = rrsMapper.selectTResourcesByRoleId(roleid);
+		List<TResources> resources;
+		try {
+			resources = rrsMapper.selectTResourcesByRoleId(roleid);
+			map.put("code", "ok");
+			map.put("roleid", roleid);
+			map.put("list", resources);
+			return map;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-		System.out.println(resources);
-		return null;
+	public Map<String, Object> selectRoleRes(Integer pagenum, Integer pagesize) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<RoleRes> records;
+		try {
+			if (null == pagenum || null == pagesize) {
+				records = rrsMapper.selectRoleAndResources();
+				map.put("code", "ok");
+				map.put("resources", records);
+				return map;
+			}
+			PageHelper.startPage(pagenum, pagesize);
+			records = rrsMapper.selectRoleAndResources();
+			PageInfo<RoleRes> page = new PageInfo<RoleRes>(records);
+			long count = page.getTotal();
+			map.put("code", "ok");
+			map.put("count", count);
+			map.put("resources", records);
+			return map;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

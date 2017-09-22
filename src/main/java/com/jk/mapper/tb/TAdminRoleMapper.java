@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TAdminRole;
-import com.jk.tb.pojo.TAdminRoleExample;
+import com.jk.pojo.tb.TAdminRole;
+import com.jk.pojo.tb.TAdminRoleExample;
 
 public interface TAdminRoleMapper {
     @SelectProvider(type=TAdminRoleSqlProvider.class, method="countByExample")

@@ -16,10 +16,10 @@ import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 import java.util.List;
 import java.util.Map;
 
-import com.jk.tb.pojo.TResources;
-import com.jk.tb.pojo.TResourcesExample;
-import com.jk.tb.pojo.TResourcesExample.Criteria;
-import com.jk.tb.pojo.TResourcesExample.Criterion;
+import com.jk.pojo.tb.TResources;
+import com.jk.pojo.tb.TResourcesExample;
+import com.jk.pojo.tb.TResourcesExample.Criteria;
+import com.jk.pojo.tb.TResourcesExample.Criterion;
 
 public class TResourcesSqlProvider {
 

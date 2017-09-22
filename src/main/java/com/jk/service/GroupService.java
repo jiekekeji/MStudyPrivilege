@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jk.mapper.tb.TGroupMapper;
 import com.jk.mapper.tb.TResourcesMapper;
-import com.jk.tb.pojo.TGroup;
-import com.jk.tb.pojo.TGroupExample;
-import com.jk.tb.pojo.TResources;
-import com.jk.tb.pojo.TResourcesExample;
-import com.jk.tb.pojo.TGroupExample.Criteria;
+import com.jk.pojo.tb.TGroup;
+import com.jk.pojo.tb.TGroupExample;
+import com.jk.pojo.tb.TResources;
+import com.jk.pojo.tb.TResourcesExample;
+import com.jk.pojo.tb.TGroupExample.Criteria;
 import com.jk.utils.UUIDUtils;
 
 @Service

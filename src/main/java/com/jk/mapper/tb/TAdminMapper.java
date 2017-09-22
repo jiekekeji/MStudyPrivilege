@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TAdmin;
-import com.jk.tb.pojo.TAdminExample;
+import com.jk.pojo.tb.TAdmin;
+import com.jk.pojo.tb.TAdminExample;
 
 public interface TAdminMapper {
     @SelectProvider(type=TAdminSqlProvider.class, method="countByExample")

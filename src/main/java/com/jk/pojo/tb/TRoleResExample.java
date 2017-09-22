@@ -1,16 +1,16 @@
-package com.jk.tb.pojo;
+package com.jk.pojo.tb;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TAdminRoleExample {
+public class TRoleResExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TAdminRoleExample() {
+    public TRoleResExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -244,73 +244,73 @@ public class TAdminRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdIsNull() {
-            addCriterion("admin_id is null");
+        public Criteria andResIdIsNull() {
+            addCriterion("res_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdIsNotNull() {
-            addCriterion("admin_id is not null");
+        public Criteria andResIdIsNotNull() {
+            addCriterion("res_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdEqualTo(String value) {
-            addCriterion("admin_id =", value, "adminId");
+        public Criteria andResIdEqualTo(String value) {
+            addCriterion("res_id =", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdNotEqualTo(String value) {
-            addCriterion("admin_id <>", value, "adminId");
+        public Criteria andResIdNotEqualTo(String value) {
+            addCriterion("res_id <>", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdGreaterThan(String value) {
-            addCriterion("admin_id >", value, "adminId");
+        public Criteria andResIdGreaterThan(String value) {
+            addCriterion("res_id >", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdGreaterThanOrEqualTo(String value) {
-            addCriterion("admin_id >=", value, "adminId");
+        public Criteria andResIdGreaterThanOrEqualTo(String value) {
+            addCriterion("res_id >=", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdLessThan(String value) {
-            addCriterion("admin_id <", value, "adminId");
+        public Criteria andResIdLessThan(String value) {
+            addCriterion("res_id <", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdLessThanOrEqualTo(String value) {
-            addCriterion("admin_id <=", value, "adminId");
+        public Criteria andResIdLessThanOrEqualTo(String value) {
+            addCriterion("res_id <=", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdLike(String value) {
-            addCriterion("admin_id like", value, "adminId");
+        public Criteria andResIdLike(String value) {
+            addCriterion("res_id like", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdNotLike(String value) {
-            addCriterion("admin_id not like", value, "adminId");
+        public Criteria andResIdNotLike(String value) {
+            addCriterion("res_id not like", value, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdIn(List<String> values) {
-            addCriterion("admin_id in", values, "adminId");
+        public Criteria andResIdIn(List<String> values) {
+            addCriterion("res_id in", values, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdNotIn(List<String> values) {
-            addCriterion("admin_id not in", values, "adminId");
+        public Criteria andResIdNotIn(List<String> values) {
+            addCriterion("res_id not in", values, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdBetween(String value1, String value2) {
-            addCriterion("admin_id between", value1, value2, "adminId");
+        public Criteria andResIdBetween(String value1, String value2) {
+            addCriterion("res_id between", value1, value2, "resId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminIdNotBetween(String value1, String value2) {
-            addCriterion("admin_id not between", value1, value2, "adminId");
+        public Criteria andResIdNotBetween(String value1, String value2) {
+            addCriterion("res_id not between", value1, value2, "resId");
             return (Criteria) this;
         }
     }

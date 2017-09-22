@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TRole;
-import com.jk.tb.pojo.TRoleExample;
+import com.jk.pojo.tb.TRole;
+import com.jk.pojo.tb.TRoleExample;
 
 public interface TRoleMapper {
     @SelectProvider(type=TRoleSqlProvider.class, method="countByExample")

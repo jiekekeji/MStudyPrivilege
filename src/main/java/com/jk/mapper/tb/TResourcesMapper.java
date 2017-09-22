@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import com.jk.tb.pojo.TResources;
-import com.jk.tb.pojo.TResourcesExample;
+import com.jk.pojo.tb.TResources;
+import com.jk.pojo.tb.TResourcesExample;
 
 public interface TResourcesMapper {
     @SelectProvider(type=TResourcesSqlProvider.class, method="countByExample")
