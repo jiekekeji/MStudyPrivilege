@@ -22,6 +22,7 @@ F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\filters\MyRequest.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminRoleSqlProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\tb\pojo\TResources.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\sql\provider\RoleResProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TResourcesMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\tb\pojo\TAdmin.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TGroupSqlProvider.java

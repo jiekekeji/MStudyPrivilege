@@ -15,6 +15,7 @@ import com.jk.mapper.tb.TRoleMapper;
 import com.jk.mapper.tb.TRoleResMapper;
 import com.jk.tb.pojo.TAdminRole;
 import com.jk.tb.pojo.TAdminRoleExample;
+import com.jk.tb.pojo.TResources;
 import com.jk.tb.pojo.TRole;
 import com.jk.tb.pojo.TRoleExample;
 import com.jk.tb.pojo.TRoleRes;
@@ -155,9 +156,18 @@ public class RoleService {
 
 	public Map<String, Object> selectRoleResByRoleID(String roleId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		rrsMapper.selectResourcesByRoleID(roleId);
-		
-		System.out.println(rrsMapper.selectResourcesByRoleID(roleId));
+		TRoleResExample example = new TRoleResExample();
+		TRoleResExample.Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+
+		List<TRoleRes> roleRes = roleResMapper.selectByExample(example);
+		System.out.println(roleRes);
+		Map<String, Object> paras = new HashMap<String, Object>();
+		paras.put("paras", roleRes);
+
+		List<TResources> resources = rrsMapper.selectTResourcesByIds(paras);
+
+		System.out.println(resources);
 		return null;
 	}
 
