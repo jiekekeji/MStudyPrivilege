@@ -154,18 +154,9 @@ public class RoleService {
 		}
 	}
 
-	public Map<String, Object> selectRoleResByRoleID(String roleId) throws Exception {
+	public Map<String, Object> selectRoleResByRoleID(String roleid) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		TRoleResExample example = new TRoleResExample();
-		TRoleResExample.Criteria criteria = example.createCriteria();
-		criteria.andRoleIdEqualTo(roleId);
-
-		List<TRoleRes> roleRes = roleResMapper.selectByExample(example);
-		System.out.println(roleRes);
-		Map<String, Object> paras = new HashMap<String, Object>();
-		paras.put("paras", roleRes);
-
-		List<TResources> resources = rrsMapper.selectTResourcesByIds(paras);
+		List<TResources> resources = rrsMapper.selectTResourcesByRoleId(roleid);
 
 		System.out.println(resources);
 		return null;

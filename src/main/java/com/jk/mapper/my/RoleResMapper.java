@@ -1,15 +1,20 @@
 package com.jk.mapper.my;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.type.JdbcType;
 
-import com.jk.sql.provider.RoleResProvider;
 import com.jk.tb.pojo.TResources;
 
 public interface RoleResMapper {
 
-	@SelectProvider(type = RoleResProvider.class, method = "selectTResourcesByIds")
-	public List<TResources> selectTResourcesByIds(Map<String, Object> map);
+	@Select("SELECT * FROM t_resources WHERE EXISTS (SELECT res_id FROM t_role_res WHERE role_id=#{roleid})")
+	@Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.CHAR, id = true),
+			@Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "url", property = "url", jdbcType = JdbcType.VARCHAR),
+			@Result(column = "group_id", property = "groupId", jdbcType = JdbcType.CHAR) })
+	List<TResources> selectTResourcesByRoleId(String roleid);
 }
