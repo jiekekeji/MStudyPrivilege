@@ -16,10 +16,12 @@ import com.jk.mapper.tb.TAdminMapper;
 import com.jk.mapper.tb.TAdminRoleMapper;
 import com.jk.pojo.my.AdminRole;
 import com.jk.pojo.tb.TAdmin;
+import com.jk.pojo.tb.TAdminExample;
 import com.jk.pojo.tb.TAdminRole;
 import com.jk.pojo.tb.TAdminRoleExample;
 import com.jk.pojo.tb.TResources;
 import com.jk.pojo.tb.TRole;
+import com.jk.utils.MD5Utils;
 import com.jk.utils.UUIDUtils;
 
 @Service
@@ -33,13 +35,14 @@ public class AdminService {
 	private AdminRoleMapper arMapper;
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Map<String, Object> add(String name, String remarks, String phone, String qq, String[] roleids)
-			throws Exception {
+	public Map<String, Object> add(String name, String password, String remarks, String phone, String qq,
+			String[] roleids) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		TAdmin admin = new TAdmin();
 		admin.setId(UUIDUtils.uuid());
 		admin.setName(name);
+		admin.setPassword(MD5Utils.md5(password));
 		admin.setRemarks(remarks);
 		admin.setPhone(phone);
 		admin.setQq(qq);
@@ -124,6 +127,34 @@ public class AdminService {
 				adminRole.setRoleId(roleids[i]);
 				adminRoleMapper.insert(adminRole);
 			}
+			map.put("code", "ok");
+			map.put("desc", "更新成功");
+			return map;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Map<String, Object> udaptePassword(String id, String npassword, String opassword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			// 查询用户
+			TAdmin ta = adminMapper.selectByPrimaryKey(id);
+			if (ta.getPassword().equals(opassword)) {
+				map.put("code", "error");
+				map.put("desc", "旧密码不正确");
+				return map;
+			}
+			// 更新用户信息
+			TAdmin admin = new TAdmin();
+			admin.setId(id);
+			admin.setPassword(npassword);
+			// 从用户-角色表删除之前的关系
+			TAdminExample example = new TAdminExample();
+			TAdminExample.Criteria criteria = example.createCriteria();
+			criteria.andIdEqualTo(npassword);
+			adminMapper.updateByPrimaryKeySelective(admin);
 			map.put("code", "ok");
 			map.put("desc", "更新成功");
 			return map;
