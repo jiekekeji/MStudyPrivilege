@@ -177,7 +177,10 @@ public class RoleService {
 		try {
 			if (null == pagenum || null == pagesize) {
 				records = rrsMapper.selectRoleAndResources();
+				PageInfo<RoleRes> page = new PageInfo<RoleRes>(records);
+				long count = page.getTotal();
 				map.put("code", "ok");
+				map.put("count", count);
 				map.put("resources", records);
 				return map;
 			}

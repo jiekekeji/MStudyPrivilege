@@ -20,7 +20,7 @@ public class RoleCtrl {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public Object add(String name, String remarks, String[] resourcesIDs) {
+	public Object add(String name, String remarks, String[] resids) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(name) || name.length() > 24 || TxUtils.isEmpty(remarks) || remarks.length() > 255) {
 			map.put("code", "error");
@@ -28,7 +28,7 @@ public class RoleCtrl {
 			return map;
 		}
 		try {
-			map = roleService.add(name, remarks, resourcesIDs);
+			map = roleService.add(name, remarks, resids);
 			return map;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -60,7 +60,7 @@ public class RoleCtrl {
 
 	@RequestMapping("/udapte")
 	@ResponseBody
-	public Object udapteByID(String id, String name, String remarks, String[] resourcesIDs) {
+	public Object udapteByID(String id, String name, String remarks, String[] resids) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(id) || TxUtils.isEmpty(name) || TxUtils.isEmpty(remarks) || id.length() != 32
 				|| name.length() > 24 || remarks.length() > 255) {
@@ -69,7 +69,7 @@ public class RoleCtrl {
 			return map;
 		}
 		try {
-			return roleService.udapteByID(id, name, remarks, resourcesIDs);
+			return roleService.udapteByID(id, name, remarks, resids);
 		} catch (Exception e) {
 			System.err.println(e);
 			map.put("code", "error");
