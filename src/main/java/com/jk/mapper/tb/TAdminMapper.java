@@ -30,10 +30,12 @@ public interface TAdminMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "insert into t_admin (id, name, remarks, ",
-        "phone, qq, state)",
-        "values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, ",
-        "#{phone,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})"
+        "insert into t_admin (id, name, password, ",
+        "remarks, phone, qq, ",
+        "state)",
+        "values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, ",
+        "#{remarks,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, ",
+        "#{state,jdbcType=INTEGER})"
     })
     int insert(TAdmin record);
 
@@ -44,6 +46,7 @@ public interface TAdminMapper {
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="password", property="password", jdbcType=JdbcType.CHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
         @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR),
@@ -53,13 +56,14 @@ public interface TAdminMapper {
 
     @Select({
         "select",
-        "id, name, remarks, phone, qq, state",
+        "id, name, password, remarks, phone, qq, state",
         "from t_admin",
         "where id = #{id,jdbcType=CHAR}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="password", property="password", jdbcType=JdbcType.CHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
         @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR),
@@ -79,6 +83,7 @@ public interface TAdminMapper {
     @Update({
         "update t_admin",
         "set name = #{name,jdbcType=VARCHAR},",
+          "password = #{password,jdbcType=CHAR},",
           "remarks = #{remarks,jdbcType=VARCHAR},",
           "phone = #{phone,jdbcType=CHAR},",
           "qq = #{qq,jdbcType=VARCHAR},",
