@@ -1,4 +1,5 @@
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TRoleRes.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\service\AdminService.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\ctrl\GroupCtrl.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TRole.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TRoleExample.java
@@ -8,19 +9,20 @@ F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TRoleSqlProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\my\RoleRes.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TAdminRoleExample.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\utils\TxUtils.java
-F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TRoleResMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TAdminRole.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TRoleResMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\service\RoleService.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TAdminExample.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TGroupMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TRoleMapper.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\my\AdminRoleMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TResources.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TGroupExample.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TRoleResSqlProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\utils\UUIDUtils.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminMapper.java
-F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TGroup.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\filters\MyRequest.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TGroup.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminRoleSqlProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TResourcesExample.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\sql\provider\RoleResProvider.java
@@ -33,6 +35,7 @@ F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminRoleMapper.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\ctrl\ResourcesCtrl.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\pojo\tb\TAdmin.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\service\GroupService.java
+F:\github\MStudyPrivilege\src\main\java\com\jk\ctrl\AdminCtrl.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TAdminSqlProvider.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\ctrl\RoleCtrl.java
 F:\github\MStudyPrivilege\src\main\java\com\jk\mapper\tb\TResourcesSqlProvider.java

@@ -11,18 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jk.mapper.my.RoleResMapper;
+import com.jk.mapper.my.AdminRoleMapper;
 import com.jk.mapper.tb.TAdminMapper;
 import com.jk.mapper.tb.TAdminRoleMapper;
-import com.jk.pojo.my.RoleRes;
+import com.jk.pojo.my.AdminRole;
 import com.jk.pojo.tb.TAdmin;
 import com.jk.pojo.tb.TAdminRole;
 import com.jk.pojo.tb.TAdminRoleExample;
-import com.jk.pojo.tb.TResources;
 import com.jk.pojo.tb.TRole;
-import com.jk.pojo.tb.TRoleExample;
-import com.jk.pojo.tb.TRoleRes;
-import com.jk.pojo.tb.TRoleResExample;
 import com.jk.utils.UUIDUtils;
 
 @Service
@@ -33,7 +29,7 @@ public class AdminService {
 	@Autowired
 	private TAdminRoleMapper adminRoleMapper;
 	@Autowired
-	private RoleResMapper rrsMapper;
+	private AdminRoleMapper arMapper;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> add(String name, String remarks, String phone, String qq, String[] roleids)
@@ -46,6 +42,7 @@ public class AdminService {
 		admin.setRemarks(remarks);
 		admin.setPhone(phone);
 		admin.setQq(qq);
+		admin.setState(0);
 		try {
 			adminMapper.insert(admin);
 			// 往用户-角色表添加
@@ -53,7 +50,6 @@ public class AdminService {
 				TAdminRole adminRole = new TAdminRole();
 				adminRole.setId(UUIDUtils.uuid());
 				adminRole.setAdminId(admin.getId());
-				;
 				adminRole.setRoleId(roleids[i]);
 				adminRoleMapper.insert(adminRole);
 			}
@@ -135,14 +131,14 @@ public class AdminService {
 		}
 	}
 
-	public Map<String, Object> selectRoleResByRoleID(String roleid) throws Exception {
+	public Map<String, Object> selectAdminRolesByAdminID(String amdinid) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<TResources> resources;
+		List<TRole> roles;
 		try {
-			resources = rrsMapper.selectTResourcesByRoleId(roleid);
+			roles = arMapper.selectTRolesByAdminId(amdinid);
 			map.put("code", "ok");
-			map.put("roleid", roleid);
-			map.put("list", resources);
+			map.put("roleid", amdinid);
+			map.put("list", roles);
 			return map;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -151,11 +147,11 @@ public class AdminService {
 
 	public Map<String, Object> selectRoleRes(Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RoleRes> records;
+		List<AdminRole> records;
 		try {
 			if (null == pagenum || null == pagesize) {
-				records = rrsMapper.selectRoleAndResources();
-				PageInfo<RoleRes> page = new PageInfo<RoleRes>(records);
+				records = arMapper.selectAdminAndRole();
+				PageInfo<AdminRole> page = new PageInfo<AdminRole>(records);
 				long count = page.getTotal();
 				map.put("code", "ok");
 				map.put("count", count);
@@ -163,8 +159,8 @@ public class AdminService {
 				return map;
 			}
 			PageHelper.startPage(pagenum, pagesize);
-			records = rrsMapper.selectRoleAndResources();
-			PageInfo<RoleRes> page = new PageInfo<RoleRes>(records);
+			records = arMapper.selectAdminAndRole();
+			PageInfo<AdminRole> page = new PageInfo<AdminRole>(records);
 			long count = page.getTotal();
 			map.put("code", "ok");
 			map.put("count", count);

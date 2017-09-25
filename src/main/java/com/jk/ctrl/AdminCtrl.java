@@ -34,7 +34,7 @@ public class AdminCtrl {
 			return map;
 		}
 		try {
-			map = roleService.add(name, remarks, phone, qq, roleids);
+			map = adminService.add(name, remarks, phone, qq, roleids);
 			return map;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -55,7 +55,7 @@ public class AdminCtrl {
 			return map;
 		}
 		try {
-			return roleService.deleteByID(id);
+			return adminService.deleteByID(id);
 		} catch (Exception e) {
 			System.err.println(e);
 			map.put("code", "error");
@@ -81,7 +81,7 @@ public class AdminCtrl {
 			return map;
 		}
 		try {
-			return roleService.udapteByID(id, name, remarks, phone, qq, roleids);
+			return adminService.udapteByID(id, name, remarks, phone, qq, roleids);
 		} catch (Exception e) {
 			System.err.println(e);
 			map.put("code", "error");
@@ -92,15 +92,15 @@ public class AdminCtrl {
 
 	@RequestMapping("/selectadmrore")
 	@ResponseBody
-	public Object selectResByRoleID(String roleid) {
+	public Object selectResByRoleID(String amdinid) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (TxUtils.isEmpty(roleid) || roleid.length() != 32) {
+		if (TxUtils.isEmpty(amdinid) || amdinid.length() != 32) {
 			map.put("code", "error");
 			map.put("desc", "参数错误");
 			return map;
 		}
 		try {
-			map = roleService.selectRoleResByRoleID(roleid);
+			map = adminService.selectAdminRolesByAdminID(amdinid);
 			return map;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -115,7 +115,7 @@ public class AdminCtrl {
 	public Object selectResByRole(Integer pagenum, Integer pagesize) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			return roleService.selectRoleRes(pagenum, pagesize);
+			return adminService.selectRoleRes(pagenum, pagesize);
 		} catch (Exception e) {
 			System.out.println(e);
 			map.put("code", "error");
