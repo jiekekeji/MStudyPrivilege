@@ -11,6 +11,8 @@ public class TAdmin {
 
     private String qq;
 
+    private Integer state;
+
     public String getId() {
         return id;
     }
@@ -51,6 +53,14 @@ public class TAdmin {
         this.qq = qq == null ? null : qq.trim();
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -62,6 +72,7 @@ public class TAdmin {
         sb.append(", remarks=").append(remarks);
         sb.append(", phone=").append(phone);
         sb.append(", qq=").append(qq);
+        sb.append(", state=").append(state);
         sb.append("]");
         return sb.toString();
     }
@@ -82,7 +93,8 @@ public class TAdmin {
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getQq() == null ? other.getQq() == null : this.getQq().equals(other.getQq()));
+            && (this.getQq() == null ? other.getQq() == null : this.getQq().equals(other.getQq()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()));
     }
 
     @Override
@@ -94,6 +106,7 @@ public class TAdmin {
         result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getQq() == null) ? 0 : getQq().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         return result;
     }
 }

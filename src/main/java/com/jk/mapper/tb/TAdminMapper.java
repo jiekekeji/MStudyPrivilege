@@ -1,5 +1,7 @@
 package com.jk.mapper.tb;
 
+import com.jk.pojo.tb.TAdmin;
+import com.jk.pojo.tb.TAdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -13,9 +15,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import com.jk.pojo.tb.TAdmin;
-import com.jk.pojo.tb.TAdminExample;
 
 public interface TAdminMapper {
     @SelectProvider(type=TAdminSqlProvider.class, method="countByExample")
@@ -32,9 +31,9 @@ public interface TAdminMapper {
 
     @Insert({
         "insert into t_admin (id, name, remarks, ",
-        "phone, qq)",
+        "phone, qq, state)",
         "values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, ",
-        "#{phone,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR})"
+        "#{phone,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})"
     })
     int insert(TAdmin record);
 
@@ -47,13 +46,14 @@ public interface TAdminMapper {
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR)
+        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR),
+        @Result(column="state", property="state", jdbcType=JdbcType.INTEGER)
     })
     List<TAdmin> selectByExample(TAdminExample example);
 
     @Select({
         "select",
-        "id, name, remarks, phone, qq",
+        "id, name, remarks, phone, qq, state",
         "from t_admin",
         "where id = #{id,jdbcType=CHAR}"
     })
@@ -62,7 +62,8 @@ public interface TAdminMapper {
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR)
+        @Result(column="qq", property="qq", jdbcType=JdbcType.VARCHAR),
+        @Result(column="state", property="state", jdbcType=JdbcType.INTEGER)
     })
     TAdmin selectByPrimaryKey(String id);
 
@@ -80,7 +81,8 @@ public interface TAdminMapper {
         "set name = #{name,jdbcType=VARCHAR},",
           "remarks = #{remarks,jdbcType=VARCHAR},",
           "phone = #{phone,jdbcType=CHAR},",
-          "qq = #{qq,jdbcType=VARCHAR}",
+          "qq = #{qq,jdbcType=VARCHAR},",
+          "state = #{state,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=CHAR}"
     })
     int updateByPrimaryKey(TAdmin record);
