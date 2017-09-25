@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.jk.pojo.my.AdminRole;
+import com.jk.pojo.tb.TResources;
 import com.jk.pojo.tb.TRole;
 
 public interface AdminRoleMapper {
@@ -32,4 +33,13 @@ public interface AdminRoleMapper {
 			@Result(column = "qq", property = "qq"), @Result(column = "state", property = "state"),
 			@Result(column = "id", property = "roles", many = @Many(select = "com.jk.mapper.my.AdminRoleMapper.selectTRolesByAdminId") ) })
 	List<AdminRole> selectAdminAndRole();
+
+	/**
+	 * 根据用户id查询用户的资源
+	 * 
+	 * @param adminId
+	 * @return
+	 */
+	@Select("SELECT * FROM t_resources WHERE EXISTS (SELECT id FROM t_role WHERE EXISTS (SELECT role_id FROM t_admin_role WHERE admin_id=#{adminId})")
+	List<TResources> selectTResourcesByAdminId(String adminId);
 }

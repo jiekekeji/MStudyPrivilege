@@ -18,6 +18,7 @@ import com.jk.pojo.my.AdminRole;
 import com.jk.pojo.tb.TAdmin;
 import com.jk.pojo.tb.TAdminRole;
 import com.jk.pojo.tb.TAdminRoleExample;
+import com.jk.pojo.tb.TResources;
 import com.jk.pojo.tb.TRole;
 import com.jk.utils.UUIDUtils;
 
@@ -164,11 +165,23 @@ public class AdminService {
 			long count = page.getTotal();
 			map.put("code", "ok");
 			map.put("count", count);
-			map.put("resources", records);
+			map.put("roles", records);
 			return map;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
+	public Map<String, Object> selectTResourcesByAdminId(String adminid) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<TResources> records;
+		try {
+			records = arMapper.selectTResourcesByAdminId(adminid);
+			map.put("code", "ok");
+			map.put("resources", records);
+			return map;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
