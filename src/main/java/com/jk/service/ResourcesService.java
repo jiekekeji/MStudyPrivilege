@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.mapper.tb.TResourcesMapper;
@@ -21,12 +20,22 @@ public class ResourcesService {
 	@Autowired
 	private TResourcesMapper resourcesMapper;
 
-	public Map<String, Object> add(String name, String url, String groupId) throws Exception {
+	/**
+	 * 添加资源
+	 * 
+	 * @param name
+	 * @param url
+	 * @param groupId
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> add(String name, String url, Integer login, String groupId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResources record = new TResources();
 		record.setId(UUIDUtils.uuid());
 		record.setName(name);
 		record.setUrl(url);
+		record.setLogin(login);
 		record.setGroupId(groupId);
 		try {
 			Map<String, Object> temp = isResourcesNameExit(name);
@@ -42,6 +51,13 @@ public class ResourcesService {
 		}
 	}
 
+	/**
+	 * 根据id删除资源
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, Object> deleteByID(String id) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -55,12 +71,23 @@ public class ResourcesService {
 
 	}
 
-	public Object udapteByID(String id, String name, String url, String groupId) throws Exception {
+	/**
+	 * 根据ID更新资源
+	 * 
+	 * @param id
+	 * @param name
+	 * @param url
+	 * @param groupId
+	 * @return
+	 * @throws Exception
+	 */
+	public Object udapteByID(String id, String name, String url, Integer login, String groupId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResources record = new TResources();
 		record.setId(UUIDUtils.uuid());
 		record.setName(name);
 		record.setUrl(url);
+		record.setLogin(login);
 		record.setGroupId(groupId);
 		try {
 			resourcesMapper.updateByPrimaryKey(record);
@@ -73,6 +100,13 @@ public class ResourcesService {
 
 	}
 
+	/**
+	 * 根据id查询资源
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public Object selectByID(String id) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -86,6 +120,13 @@ public class ResourcesService {
 
 	}
 
+	/**
+	 * 检测资源名是否存在
+	 * 
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, Object> isResourcesNameExit(String name) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
@@ -108,6 +149,15 @@ public class ResourcesService {
 
 	}
 
+	/**
+	 * 分组查询资源
+	 * 
+	 * @param groupId
+	 * @param pagenum
+	 * @param pagesize
+	 * @return
+	 * @throws Exception
+	 */
 	public Object selectByGroupId(String groupId, Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
@@ -135,6 +185,14 @@ public class ResourcesService {
 
 	}
 
+	/**
+	 * 查询所有的资源
+	 * 
+	 * @param pagenum
+	 * @param pagesize
+	 * @return
+	 * @throws Exception
+	 */
 	public Object selectAll(Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TResourcesExample example = new TResourcesExample();
@@ -158,6 +216,5 @@ public class ResourcesService {
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 }

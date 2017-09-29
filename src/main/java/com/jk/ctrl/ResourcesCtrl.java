@@ -20,16 +20,16 @@ public class ResourcesCtrl {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public Object add(String name, String url, String groupId) {
+	public Object add(String name, String url, Integer login, String groupId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(name) || TxUtils.isEmpty(url) || name.length() > 36 || url.length() > 64
-				|| TxUtils.isEmpty(groupId) || groupId.length() != 32) {
+				|| TxUtils.isEmpty(groupId) || groupId.length() != 32 || login != 0 || login != 1) {
 			map.put("code", "error");
 			map.put("desc", "参数错误");
 			return map;
 		}
 		try {
-			return resourcesService.add(name, url, groupId);
+			return resourcesService.add(name, url, login, groupId);
 		} catch (Exception e) {
 			System.out.println(e);
 			map.put("code", "error");
@@ -59,7 +59,7 @@ public class ResourcesCtrl {
 
 	@RequestMapping("/udapte")
 	@ResponseBody
-	public Object udapteByID(String id, String name, String url, String groupId) {
+	public Object udapteByID(String id, String name, String url, Integer login, String groupId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(id) || TxUtils.isEmpty(name) || TxUtils.isEmpty(url) || TxUtils.isEmpty(groupId)
 				|| id.length() != 32 || name.length() > 36 || url.length() > 64 || groupId.length() != 32) {
@@ -68,7 +68,7 @@ public class ResourcesCtrl {
 			return map;
 		}
 		try {
-			return resourcesService.udapteByID(id, name, url, groupId);
+			return resourcesService.udapteByID(id, name, url, login, groupId);
 		} catch (Exception e) {
 			System.out.println(e);
 			map.put("code", "error");
