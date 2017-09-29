@@ -1,5 +1,7 @@
 package com.jk.mapper.tb;
 
+import com.jk.pojo.tb.TResources;
+import com.jk.pojo.tb.TResourcesExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -13,9 +15,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import com.jk.pojo.tb.TResources;
-import com.jk.pojo.tb.TResourcesExample;
 
 public interface TResourcesMapper {
     @SelectProvider(type=TResourcesSqlProvider.class, method="countByExample")
@@ -32,9 +31,9 @@ public interface TResourcesMapper {
 
     @Insert({
         "insert into t_resources (id, name, url, ",
-        "group_id)",
+        "login, group_id)",
         "values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, ",
-        "#{groupId,jdbcType=CHAR})"
+        "#{login,jdbcType=INTEGER}, #{groupId,jdbcType=CHAR})"
     })
     int insert(TResources record);
 
@@ -46,13 +45,14 @@ public interface TResourcesMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
+        @Result(column="login", property="login", jdbcType=JdbcType.INTEGER),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.CHAR)
     })
     List<TResources> selectByExample(TResourcesExample example);
 
     @Select({
         "select",
-        "id, name, url, group_id",
+        "id, name, url, login, group_id",
         "from t_resources",
         "where id = #{id,jdbcType=CHAR}"
     })
@@ -60,6 +60,7 @@ public interface TResourcesMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.CHAR, id=true),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
         @Result(column="url", property="url", jdbcType=JdbcType.VARCHAR),
+        @Result(column="login", property="login", jdbcType=JdbcType.INTEGER),
         @Result(column="group_id", property="groupId", jdbcType=JdbcType.CHAR)
     })
     TResources selectByPrimaryKey(String id);
@@ -77,6 +78,7 @@ public interface TResourcesMapper {
         "update t_resources",
         "set name = #{name,jdbcType=VARCHAR},",
           "url = #{url,jdbcType=VARCHAR},",
+          "login = #{login,jdbcType=INTEGER},",
           "group_id = #{groupId,jdbcType=CHAR}",
         "where id = #{id,jdbcType=CHAR}"
     })

@@ -7,6 +7,8 @@ public class TResources {
 
     private String url;
 
+    private Integer login;
+
     private String groupId;
 
     public String getId() {
@@ -33,6 +35,14 @@ public class TResources {
         this.url = url == null ? null : url.trim();
     }
 
+    public Integer getLogin() {
+        return login;
+    }
+
+    public void setLogin(Integer login) {
+        this.login = login;
+    }
+
     public String getGroupId() {
         return groupId;
     }
@@ -50,6 +60,7 @@ public class TResources {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", url=").append(url);
+        sb.append(", login=").append(login);
         sb.append(", groupId=").append(groupId);
         sb.append("]");
         return sb.toString();
@@ -70,6 +81,7 @@ public class TResources {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getLogin() == null ? other.getLogin() == null : this.getLogin().equals(other.getLogin()))
             && (this.getGroupId() == null ? other.getGroupId() == null : this.getGroupId().equals(other.getGroupId()));
     }
 
@@ -80,6 +92,7 @@ public class TResources {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getLogin() == null) ? 0 : getLogin().hashCode());
         result = prime * result + ((getGroupId() == null) ? 0 : getGroupId().hashCode());
         return result;
     }

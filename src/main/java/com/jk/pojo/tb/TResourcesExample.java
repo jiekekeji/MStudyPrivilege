@@ -314,6 +314,66 @@ public class TResourcesExample {
             return (Criteria) this;
         }
 
+        public Criteria andLoginIsNull() {
+            addCriterion("login is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIsNotNull() {
+            addCriterion("login is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginEqualTo(Integer value) {
+            addCriterion("login =", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginNotEqualTo(Integer value) {
+            addCriterion("login <>", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginGreaterThan(Integer value) {
+            addCriterion("login >", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginGreaterThanOrEqualTo(Integer value) {
+            addCriterion("login >=", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLessThan(Integer value) {
+            addCriterion("login <", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLessThanOrEqualTo(Integer value) {
+            addCriterion("login <=", value, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIn(List<Integer> values) {
+            addCriterion("login in", values, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginNotIn(List<Integer> values) {
+            addCriterion("login not in", values, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginBetween(Integer value1, Integer value2) {
+            addCriterion("login between", value1, value2, "login");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginNotBetween(Integer value1, Integer value2) {
+            addCriterion("login not between", value1, value2, "login");
+            return (Criteria) this;
+        }
+
         public Criteria andGroupIdIsNull() {
             addCriterion("group_id is null");
             return (Criteria) this;

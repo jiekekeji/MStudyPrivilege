@@ -13,13 +13,12 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import java.util.List;
-import java.util.Map;
-
 import com.jk.pojo.tb.TResources;
-import com.jk.pojo.tb.TResourcesExample;
 import com.jk.pojo.tb.TResourcesExample.Criteria;
 import com.jk.pojo.tb.TResourcesExample.Criterion;
+import com.jk.pojo.tb.TResourcesExample;
+import java.util.List;
+import java.util.Map;
 
 public class TResourcesSqlProvider {
 
@@ -54,6 +53,10 @@ public class TResourcesSqlProvider {
             VALUES("url", "#{url,jdbcType=VARCHAR}");
         }
         
+        if (record.getLogin() != null) {
+            VALUES("login", "#{login,jdbcType=INTEGER}");
+        }
+        
         if (record.getGroupId() != null) {
             VALUES("group_id", "#{groupId,jdbcType=CHAR}");
         }
@@ -70,6 +73,7 @@ public class TResourcesSqlProvider {
         }
         SELECT("name");
         SELECT("url");
+        SELECT("login");
         SELECT("group_id");
         FROM("t_resources");
         applyWhere(example, false);
@@ -100,6 +104,10 @@ public class TResourcesSqlProvider {
             SET("url = #{record.url,jdbcType=VARCHAR}");
         }
         
+        if (record.getLogin() != null) {
+            SET("login = #{record.login,jdbcType=INTEGER}");
+        }
+        
         if (record.getGroupId() != null) {
             SET("group_id = #{record.groupId,jdbcType=CHAR}");
         }
@@ -115,6 +123,7 @@ public class TResourcesSqlProvider {
         SET("id = #{record.id,jdbcType=CHAR}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
         SET("url = #{record.url,jdbcType=VARCHAR}");
+        SET("login = #{record.login,jdbcType=INTEGER}");
         SET("group_id = #{record.groupId,jdbcType=CHAR}");
         
         TResourcesExample example = (TResourcesExample) parameter.get("example");
@@ -132,6 +141,10 @@ public class TResourcesSqlProvider {
         
         if (record.getUrl() != null) {
             SET("url = #{url,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLogin() != null) {
+            SET("login = #{login,jdbcType=INTEGER}");
         }
         
         if (record.getGroupId() != null) {
