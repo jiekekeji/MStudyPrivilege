@@ -28,7 +28,7 @@ public class AdminCtrl {
 			map.put("desc", "有些参数为空!");
 			return map;
 		}
-		if (name.length() > 24 || remarks.length() > 255 || phone.length() > 11 || qq.length() > 20
+		if (name.length() > 24 || remarks.length() > 255 || phone.length() != 11 || qq.length() > 20
 				|| password.length() > 24 || password.length() < 8) {
 			map.put("code", "error");
 			map.put("desc", "有些参数长度过长!");
@@ -146,6 +146,20 @@ public class AdminCtrl {
 			System.out.println(e);
 			map.put("code", "error");
 			map.put("desc", "查询失败");
+			return map;
+		}
+	}
+
+	@RequestMapping("/login")
+	@ResponseBody
+	public Object login(String phone, String password) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			return adminService.login(phone, password);
+		} catch (Exception e) {
+			System.out.println(e);
+			map.put("code", "error");
+			map.put("desc", "系统异常");
 			return map;
 		}
 	}

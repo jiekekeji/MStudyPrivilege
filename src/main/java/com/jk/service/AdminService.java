@@ -34,10 +34,28 @@ public class AdminService {
 	@Autowired
 	private AdminRoleMapper arMapper;
 
+	/**
+	 * 新增用户
+	 * 
+	 * @param name
+	 * @param password
+	 * @param remarks
+	 * @param phone
+	 * @param qq
+	 * @param roleids
+	 * @return
+	 * @throws Exception
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> add(String name, String password, String remarks, String phone, String qq,
 			String[] roleids) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
+
+		// 检测手机号是否已存在
+		Map<String, Object> exit = isPhoneExit(phone);
+		if (exit.get("code").equals("error")) {
+			return exit;
+		}
 
 		TAdmin admin = new TAdmin();
 		admin.setId(UUIDUtils.uuid());
@@ -65,6 +83,12 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 根据用户id删除用户
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> deleteByID(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -84,6 +108,12 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 根据用户id挂起某个用户的权限
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> hangUpById(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -101,6 +131,17 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 根据用户id更新用户信息
+	 * 
+	 * @param id
+	 * @param name
+	 * @param remarks
+	 * @param phone
+	 * @param qq
+	 * @param roleids
+	 * @return
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> udapteByID(String id, String name, String remarks, String phone, String qq,
 			String[] roleids) {
@@ -135,6 +176,14 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 根据用户id修改密码
+	 * 
+	 * @param id
+	 * @param npassword
+	 * @param opassword
+	 * @return
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Map<String, Object> udaptePassword(String id, String npassword, String opassword) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -163,6 +212,42 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 检测手机号是否已存在
+	 * 
+	 * @param phone
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> isPhoneExit(String phone) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TAdminExample example = new TAdminExample();
+		TAdminExample.Criteria criteria = example.createCriteria();
+		criteria.andPhoneEqualTo(phone);
+		List<TAdmin> admins;
+		try {
+			admins = adminMapper.selectByExample(example);
+			if (null == admins || admins.size() == 0) {
+				map.put("code", "error");
+				map.put("desc", "手机未存在!");
+				return map;
+			}
+			map.put("code", "error");
+			map.put("desc", "资源名称已存在");
+			return map;
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	/**
+	 * 根据用户id查询用户的角色
+	 * 
+	 * @param amdinid
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, Object> selectAdminRolesByAdminID(String amdinid) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TRole> roles;
@@ -177,6 +262,9 @@ public class AdminService {
 		}
 	}
 
+	/*
+	 * 查询用户和用户对应的角色
+	 */
 	public Map<String, Object> selectRoleRes(Integer pagenum, Integer pagesize) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminRole> records;
@@ -187,7 +275,7 @@ public class AdminService {
 				long count = page.getTotal();
 				map.put("code", "ok");
 				map.put("count", count);
-				map.put("resources", records);
+				map.put("admin", records);
 				return map;
 			}
 			PageHelper.startPage(pagenum, pagesize);
@@ -203,6 +291,13 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * 根据用户id查询资源
+	 * 
+	 * @param adminid
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, Object> selectTResourcesByAdminId(String adminid) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TResources> records;
@@ -213,6 +308,44 @@ public class AdminService {
 			return map;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 用户登录
+	 * 
+	 * @param adminid
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> login(String phone, String password) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TAdminExample example = new TAdminExample();
+		TAdminExample.Criteria criteria = example.createCriteria();
+		criteria.andPhoneEqualTo(phone);
+		List<TAdmin> admins;
+		try {
+			admins = adminMapper.selectByExample(example);
+			if (null == admins || admins.size() == 0) {
+				map.put("code", "error");
+				map.put("desc", "手机不存在!");
+				return map;
+			}
+			TAdmin admin = admins.get(0);
+			if (!admin.getPassword().equals(MD5Utils.md5(password))) {
+				map.put("code", "error");
+				map.put("desc", "密码不正确!");
+				return map;
+
+			}
+			// 登录成功返回该用户具有的资源
+			Map<String, Object> resMap = selectTResourcesByAdminId(admin.getId());
+			map.put("code", "ok");
+			map.put("desc", "登录成功");
+			map.put("resources", resMap.get("resources"));
+			return map;
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 }
