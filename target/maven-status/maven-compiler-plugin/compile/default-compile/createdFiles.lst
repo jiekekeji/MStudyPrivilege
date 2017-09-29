@@ -1,8 +1,6 @@
 com\jk\utils\UUIDUtils.class
 com\jk\service\GroupService.class
-com\jk\filters\MyRequest.class
 com\jk\service\RoleService.class
-com\jk\filters\EncodingFilter.class
 com\jk\utils\TxUtils.class
 com\jk\service\ResourcesService.class
 com\jk\ctrl\ResourcesCtrl.class

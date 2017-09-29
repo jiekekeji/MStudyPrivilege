@@ -1,14 +1,10 @@
 package com.jk.filters;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
  * 登录验证过滤器
@@ -16,25 +12,26 @@ import javax.servlet.http.HttpServletRequest;
  * @author Handsome
  *
  */
-public class LoginFilter implements Filter {
+public class LoginFilter extends HandlerInterceptorAdapter {
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		System.out.println("===preHandle===");
+		return super.preHandle(request, response, handler);
 	}
 
-	/**
-	 * 过滤逻辑
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest hsRequest = (HttpServletRequest) request;
-		String res = hsRequest.getRequestURI();
-		System.out.println("访问资源:" + res);
-
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		System.out.println("===postHandle===");
+		super.postHandle(request, response, handler, modelAndView);
 	}
 
-	public void destroy() {
-
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		System.out.println("===afterCompletion===");
+		super.afterCompletion(request, response, handler, ex);
 	}
-
 }

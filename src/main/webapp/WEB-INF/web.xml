@@ -26,14 +26,6 @@
 		</init-param>
 	</filter>
 	<!-- end post乱码处理器 -->
-
-	<!-- start 配置登陆过滤器 -->
-	<filter>
-		<filter-name>login</filter-name>
-		<filter-class>com.jk.filters.LoginFilter</filter-class>
-	</filter>
-	<!-- end 配置登陆过滤器 -->
-
 	<!-- start post乱码处理器对应的mapping -->
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
@@ -41,12 +33,7 @@
 	</filter-mapping>
 	<!-- end post乱码处理器对应的mapping -->
 
-	<!-- start 配置登陆过滤器对应的mapping -->
-	<filter-mapping>
-		<filter-name>login</filter-name>
-		<url-pattern>/</url-pattern>
-	</filter-mapping>
-	<!-- end 配置登陆过滤器对应的mapping -->
+
 
 	<!-- start 启动 Spring IOC 容器的 ServletContextListener -->
 	<listener>
