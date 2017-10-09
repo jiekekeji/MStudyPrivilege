@@ -197,7 +197,6 @@ public class AdminCtrl {
 	@RequestMapping("/nologin")
 	@ResponseBody
 	public Object noLogin() {
-		System.out.println("沒有權限");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", "error");
 		map.put("desc", "没有登录!");
