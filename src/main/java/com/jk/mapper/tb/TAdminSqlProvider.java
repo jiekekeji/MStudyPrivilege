@@ -13,13 +13,12 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
-import java.util.List;
-import java.util.Map;
-
 import com.jk.pojo.tb.TAdmin;
-import com.jk.pojo.tb.TAdminExample;
 import com.jk.pojo.tb.TAdminExample.Criteria;
 import com.jk.pojo.tb.TAdminExample.Criterion;
+import com.jk.pojo.tb.TAdminExample;
+import java.util.List;
+import java.util.Map;
 
 public class TAdminSqlProvider {
 
@@ -50,6 +49,10 @@ public class TAdminSqlProvider {
             VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getPassword() != null) {
+            VALUES("password", "#{password,jdbcType=CHAR}");
+        }
+        
         if (record.getRemarks() != null) {
             VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
         }
@@ -60,6 +63,10 @@ public class TAdminSqlProvider {
         
         if (record.getQq() != null) {
             VALUES("qq", "#{qq,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getState() != null) {
+            VALUES("state", "#{state,jdbcType=INTEGER}");
         }
         
         return SQL();
@@ -73,9 +80,11 @@ public class TAdminSqlProvider {
             SELECT("id");
         }
         SELECT("name");
+        SELECT("password");
         SELECT("remarks");
         SELECT("phone");
         SELECT("qq");
+        SELECT("state");
         FROM("t_admin");
         applyWhere(example, false);
         
@@ -101,6 +110,10 @@ public class TAdminSqlProvider {
             SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
+        if (record.getPassword() != null) {
+            SET("password = #{record.password,jdbcType=CHAR}");
+        }
+        
         if (record.getRemarks() != null) {
             SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
@@ -113,6 +126,10 @@ public class TAdminSqlProvider {
             SET("qq = #{record.qq,jdbcType=VARCHAR}");
         }
         
+        if (record.getState() != null) {
+            SET("state = #{record.state,jdbcType=INTEGER}");
+        }
+        
         applyWhere(example, true);
         return SQL();
     }
@@ -123,9 +140,11 @@ public class TAdminSqlProvider {
         
         SET("id = #{record.id,jdbcType=CHAR}");
         SET("name = #{record.name,jdbcType=VARCHAR}");
+        SET("password = #{record.password,jdbcType=CHAR}");
         SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         SET("phone = #{record.phone,jdbcType=CHAR}");
         SET("qq = #{record.qq,jdbcType=VARCHAR}");
+        SET("state = #{record.state,jdbcType=INTEGER}");
         
         TAdminExample example = (TAdminExample) parameter.get("example");
         applyWhere(example, true);
@@ -140,6 +159,10 @@ public class TAdminSqlProvider {
             SET("name = #{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getPassword() != null) {
+            SET("password = #{password,jdbcType=CHAR}");
+        }
+        
         if (record.getRemarks() != null) {
             SET("remarks = #{remarks,jdbcType=VARCHAR}");
         }
@@ -150,6 +173,10 @@ public class TAdminSqlProvider {
         
         if (record.getQq() != null) {
             SET("qq = #{qq,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getState() != null) {
+            SET("state = #{state,jdbcType=INTEGER}");
         }
         
         WHERE("id = #{id,jdbcType=CHAR}");

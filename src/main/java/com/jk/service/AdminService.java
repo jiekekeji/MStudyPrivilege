@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -228,8 +230,8 @@ public class AdminService {
 		try {
 			admins = adminMapper.selectByExample(example);
 			if (null == admins || admins.size() == 0) {
-				map.put("code", "error");
-				map.put("desc", "手机未存在!");
+				map.put("code", "ok");
+				map.put("desc", "手机不存在!");
 				return map;
 			}
 			map.put("code", "error");
@@ -318,7 +320,7 @@ public class AdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map<String, Object> login(String phone, String password) throws Exception {
+	public Map<String, Object> login(String phone, String password, HttpSession session) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TAdminExample example = new TAdminExample();
 		TAdminExample.Criteria criteria = example.createCriteria();
@@ -332,12 +334,15 @@ public class AdminService {
 				return map;
 			}
 			TAdmin admin = admins.get(0);
+			System.out.println(admin);
 			if (!admin.getPassword().equals(MD5Utils.md5(password))) {
 				map.put("code", "error");
 				map.put("desc", "密码不正确!");
 				return map;
 
 			}
+			// 登录成功，保存登录状态
+			session.setAttribute("admin", admin);
 			// 登录成功返回该用户具有的资源
 			Map<String, Object> resMap = selectTResourcesByAdminId(admin.getId());
 			map.put("code", "ok");

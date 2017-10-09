@@ -41,6 +41,9 @@
 			<mvc:mapping path="/**" />
 			<!-- 需排除拦截的地址,如static下的静态资源不需要拦截 -->
 			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/admin/login" />
+			<mvc:exclude-mapping path="/admin/noauthority" />
+			<mvc:exclude-mapping path="/admin/nologin" />
 			<bean class="com.jk.filters.LoginFilter" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -3,6 +3,8 @@ package com.jk.ctrl;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ public class AdminCtrl {
 	public Object add(String name, String password, String remarks, String phone, String qq, String[] roleids) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (TxUtils.isEmpty(name) || TxUtils.isEmpty(password) || TxUtils.isEmpty(remarks) || TxUtils.isEmpty(phone)
-				|| TxUtils.isEmpty(qq)) {
+				|| TxUtils.isEmpty(qq) || null == roleids) {
 			map.put("code", "error");
 			map.put("desc", "有些参数为空!");
 			return map;
@@ -152,16 +154,55 @@ public class AdminCtrl {
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public Object login(String phone, String password) {
+	public Object login(String phone, String password, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		if (TxUtils.isEmpty(phone) || phone.length() != 11) {
+			map.put("code", "error");
+			map.put("desc", "参数错误");
+			return map;
+		}
 		try {
-			return adminService.login(phone, password);
+			return adminService.login(phone, password, session);
 		} catch (Exception e) {
 			System.out.println(e);
 			map.put("code", "error");
 			map.put("desc", "系统异常");
 			return map;
 		}
+	}
+
+	@RequestMapping("/logout")
+	@ResponseBody
+	public Object logout(HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		session.setAttribute("admin", null);
+
+		map.put("code", "ok");
+		map.put("desc", "注销成功");
+		return map;
+
+	}
+
+	@RequestMapping("/noauthority")
+	@ResponseBody
+	public Object noAuthority() {
+		System.out.println("没有权限!");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", "error");
+		map.put("desc", "没有权限!");
+		return map;
+
+	}
+
+	@RequestMapping("/nologin")
+	@ResponseBody
+	public Object noLogin() {
+		System.out.println("沒有權限");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", "error");
+		map.put("desc", "没有登录!");
+		return map;
+
 	}
 
 }
