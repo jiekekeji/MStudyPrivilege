@@ -29,9 +29,7 @@ public class LoginFilter extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("===preHandle===");
 		String path = request.getServletPath();
-		System.out.println("访问的路径:" + path);
 		TAdmin admin = (TAdmin) request.getSession().getAttribute("admin");
 		if (null == admin) {
 			response.sendRedirect(request.getContextPath() + "/admin/nologin");

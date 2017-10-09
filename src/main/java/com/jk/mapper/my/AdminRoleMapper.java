@@ -19,7 +19,7 @@ public interface AdminRoleMapper {
 	 * @param roleid
 	 * @return
 	 */
-	@Select("SELECT * FROM t_role WHERE EXISTS (SELECT role_id FROM t_admin_role WHERE admin_id=#{adminId})")
+	@Select("SELECT * FROM t_role WHERE id in (SELECT role_id FROM t_admin_role WHERE admin_id=#{adminId})")
 	List<TRole> selectTRolesByAdminId(String adminId);
 
 	/**
@@ -40,6 +40,6 @@ public interface AdminRoleMapper {
 	 * @param adminId
 	 * @return
 	 */
-	@Select("SELECT * FROM t_resources WHERE EXISTS (SELECT id FROM t_role WHERE EXISTS (SELECT role_id FROM t_admin_role WHERE admin_id=#{adminId})")
+	@Select("SELECT * FROM t_resources WHERE id in (SELECT res_id FROM t_role_res WHERE role_id in (SELECT role_id FROM t_admin_role WHERE admin_id=#{adminId}));")
 	List<TResources> selectTResourcesByAdminId(String adminId);
 }

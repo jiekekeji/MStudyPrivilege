@@ -156,7 +156,7 @@ public class AdminService {
 		admin.setQq(qq);
 		try {
 			// 更新用户信息
-			adminMapper.updateByPrimaryKey(admin);
+			adminMapper.updateByPrimaryKeySelective(admin);
 			// 从用户-角色表删除之前的关系
 			TAdminRoleExample example = new TAdminRoleExample();
 			TAdminRoleExample.Criteria criteria = example.createCriteria();
@@ -257,7 +257,7 @@ public class AdminService {
 			roles = arMapper.selectTRolesByAdminId(amdinid);
 			map.put("code", "ok");
 			map.put("roleid", amdinid);
-			map.put("list", roles);
+			map.put("roles", roles);
 			return map;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

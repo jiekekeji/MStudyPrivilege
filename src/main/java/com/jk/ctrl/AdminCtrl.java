@@ -67,7 +67,7 @@ public class AdminCtrl {
 		}
 	}
 
-	@RequestMapping("/udapte")
+	@RequestMapping("/update")
 	@ResponseBody
 	public Object udapteByID(String id, String name, String remarks, String phone, String qq, String[] roleids) {
 		Map<String, Object> map = new HashMap<String, Object>();
