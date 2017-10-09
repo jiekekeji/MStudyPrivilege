@@ -267,7 +267,7 @@ public class AdminService {
 	/*
 	 * 查询用户和用户对应的角色
 	 */
-	public Map<String, Object> selectRoleRes(Integer pagenum, Integer pagesize) throws Exception {
+	public Map<String, Object> selectRoleRes(Integer pagenum, Integer pagesize) throws RuntimeException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminRole> records;
 		try {
@@ -300,7 +300,7 @@ public class AdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map<String, Object> selectTResourcesByAdminId(String adminid) throws Exception {
+	public Map<String, Object> selectTResourcesByAdminId(String adminid) throws RuntimeException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TResources> records;
 		try {
